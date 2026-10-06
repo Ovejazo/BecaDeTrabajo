@@ -1015,12 +1015,19 @@
                     <!-- Tarjetas de noticias -->
                     <div class="noticias-cards">
                         <?php
-                        // Consulta dinámica a las últimas 3 entradas de WordPress (categoría 'noticias' o general)
+                        // Consulta dinámica: busca primero en categoría 'noticias'. Si aún no tiene entradas, muestra las últimas entradas del sitio
                         $noticias_query = new WP_Query(array(
-                            'category_name'  => 'noticias',
-                            'posts_per_page' => 3,
+                            'category_name'       => 'noticias',
+                            'posts_per_page'      => 3,
                             'ignore_sticky_posts' => 1
                         ));
+
+                        if (!$noticias_query->have_posts()) {
+                            $noticias_query = new WP_Query(array(
+                                'posts_per_page'      => 3,
+                                'ignore_sticky_posts' => 1
+                            ));
+                        }
 
                         if ($noticias_query->have_posts()) :
                             while ($noticias_query->have_posts()) : $noticias_query->the_post();

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "usach-teal",
+          "color": "#00A499",
+          "name": "Teal Institucional (Pantone 3272 C)"
+        },
+        {
+          "slug": "usach-orange",
+          "color": "#EA7600",
+          "name": "Terracota Institucional (Pantone 716 C)"
+        },
+        {
+          "slug": "usach-dark",
+          "color": "#394049",
+          "name": "Gris Pizarra (Pantone 432 C)"
+        },
+        {
+          "slug": "usach-purple",
+          "color": "#8C4799",
+          "name": "Púrpura PEI 2030 (Pantone 258 C)"
+        },
+        {
+          "slug": "usach-blue",
+          "color": "#498BCA",
+          "name": "Azul PEI 2030 (Pantone 279 C)"
+        },
+        {
+          "slug": "usach-yellow",
+          "color": "#EAAA00",
+          "name": "Amarillo PEI 2030 (Pantone 124 C)"
+        },
+        {
+          "slug": "usach-red",
+          "color": "#C8102E",
+          "name": "Rojo PEI 2030 (Pantone 186 C)"
+        },
+        {
+          "slug": "white",
+          "color": "#FFFFFF",
+          "name": "Blanco"
+        },
+        {
+          "slug": "light-gray",
+          "color": "#F7F9FA",
+          "name": "Gris Claro"
+        }
+      ]
+    },
+    "layout": {
+      "contentSize": "840px",
+      "wideSize": "1200px"
+    }
+  },
+  "templateParts": [
+    {
+      "area": "header",
+      "name": "header",
+      "title": "Cabecera USACH"
+    },
+    {
+      "area": "footer",
+      "name": "footer",
+      "title": "Pie de Página USACH"
+    }
+  ],
+  "customTemplates": [
+    {
+      "name": "plantilla-nivel-3",
+      "title": "Plantilla Nivel 3 - Instituto / Centro (USACH)",
+      "postTypes": [
+        "page"
+      ]
+    }
+  ]
+}
