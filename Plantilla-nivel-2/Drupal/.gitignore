@@ -1,0 +1,21 @@
+# Ignorar las dependencias y librerías descargadas por Composer
+/vendor/
+
+# Ignorar el núcleo de Drupal (jamás se sube a GitHub)
+/web/core/
+
+# Ignorar módulos, temas y perfiles descargados
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/libraries/
+
+# Ignorar archivos subidos por usuarios y configuraciones locales
+/web/sites/*/files/
+/web/sites/*/private/
+/web/sites/*/settings.local.php
+/web/sites/*/services.local.php
+
+# Archivos de entorno y sistema
+.env
+.DS_Store

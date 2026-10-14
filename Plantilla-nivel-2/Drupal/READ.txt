@@ -1,0 +1,17 @@
+1. Tener Docker abierto
+2. Abrir la carpeta Drupal en VScode
+3. Abrir una nueva terminal
+4. Escribir ddev start y presionar Enter
+5. Ve al navegador e ingresa a [http://drupal.ddev.site](http://drupal.ddev.site).
+
+Para terminar de trabajar, escribir: ddev stop
+
+
+
+- .ddev/: Aquí están las configuraciones de los servidores (Docker) exclusivos para este proyecto.
+
+- vendor/: Son librerías de código de terceros que usa Drupal para funcionar (jamás se debe modificar nada aquí).
+
+- composer.json: Nos dice qué versión de Drupal y qué módulos tienes instalados.
+
+- web/: Es la raíz pública de tu página web. Adentro de web/ está todo el código fuente de Drupal. IMPORTANTE
