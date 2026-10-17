@@ -20,20 +20,39 @@
 </main>
 
 <section class="seccion-noticias">
-  <div class="container">
-    <h2 class="titulo-seccion">Noticias</h2>
-    <div class="grid-3-columnas">
+  <div class="container noticias-wrapper">
+    
+    {# 1. COLUMNA IZQUIERDA: Círculo decorativo con título #}
+    <div class="noticias-col-titulo">
+      <div class="noticias-circulo">
+        <h2 class="noticias-texto">Noticias</h2>
+      </div>
+    </div>
+
+    {# 2. COLUMNA DERECHA: Las 3 noticias que vienen desde Drupal #}
+    <div class="noticias-col-contenido">
       {{ page.noticias }}
     </div>
+
   </div>
 </section>
 
-<section class="seccion-galerias bg-gris">
+<section class="seccion-galerias">
   <div class="container">
-    <h2 class="titulo-seccion">Galerías</h2>
-    <div class="grid-3-columnas">
+    
+    {# 1. Título centrado #}
+    <h2 class="galerias-titulo">Galerías</h2>
+
+    {# 2. Las 3 tarjetas de Drupal #}
+    <div class="galerias-grid">
       {{ page.galerias }}
     </div>
+
+    {# 3. Botón inferior "VER MÁS FOTOS" #}
+    <div class="galerias-btn-wrapper">
+      <a href="/galerias" class="btn-ver-mas-fotos">VER MÁS FOTOS</a>
+    </div>
+
   </div>
 </section>
 

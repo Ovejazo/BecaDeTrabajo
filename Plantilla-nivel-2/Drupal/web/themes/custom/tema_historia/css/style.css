@@ -190,3 +190,236 @@ body {
   object-fit: cover;
   display: block;
 }
+
+/* ======================================================
+   SECCIÓN NOTICIAS (CÍRCULO Y 3 COLUMNAS)
+   ====================================================== */
+
+.seccion-noticias {
+  padding: 50px 0;
+  overflow: hidden;
+}
+
+/* 2 columnas: Círculo a la izquierda y tarjetas a la derecha */
+.noticias-wrapper {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* 1. EL CÍRCULO BICOLOR (TURQUESA Y GRIS) */
+.noticias-col-titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noticias-circulo {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 14px solid #00a499;
+  border-right-color: #2b3b42; /* Borde gris oscuro a la derecha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.noticias-texto {
+  color: #00a499;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* 2. CUADRÍCULA DE 3 TARJETAS */
+.noticias-col-contenido .views-view-unformatted,
+.noticias-col-contenido .region-noticias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.noticias-col-contenido .views-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Imagen de la noticia con esquinas redondeadas y sombra */
+.noticias-col-contenido .views-row img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+  display: block;
+}
+
+/* Titular de la noticia */
+.noticias-col-contenido .views-field-title a {
+  color: #2b2b2b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.noticias-col-contenido .views-field-title a:hover {
+  color: #00a499;
+}
+
+/* 3. BOTÓN PÍLDORA "VER MÁS" */
+.btn-ver-mas,
+.noticias-col-contenido .views-field-view-node a {
+  display: inline-block;
+  align-self: flex-start;
+  border: 1.5px solid #00a499;
+  color: #00a499;
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 6px 20px;
+  font-size: 0.80rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-ver-mas:hover,
+.noticias-col-contenido .views-field-view-node a:hover {
+  background-color: #00a499;
+  color: #ffffff;
+}
+
+/* Ocultar el mensaje en inglés de "No front page content..." en la portada */
+.main-content:has(.feed-icon) {
+  display: none;
+}
+
+/* ======================================================
+   SECCIÓN GALERÍAS
+   ====================================================== */
+
+.seccion-galerias {
+  background-color: #f0f7f7; /* Fondo celeste/gris muy suave */
+  padding: 60px 0 70px 0;
+  text-align: center;
+}
+
+/* 1. TÍTULO CENTRADO */
+.galerias-titulo {
+  color: #2b3b42;          /* Color oscuro institucional */
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 45px 0;
+  letter-spacing: 0.5px;
+}
+
+/* 2. CUADRÍCULA DE 3 TARJETAS HORIZONTALES */
+.galerias-grid .view-content,
+.galerias-grid .views-view-unformatted {
+  display: flex;
+  justify-content: center; /* Centra las 3 tarjetas en la pantalla */
+  align-items: center;     /* Alinea verticalmente para que la del medio sobresalga */
+  gap: 30px;               /* Separación entre tarjetas */
+  width: 100%;
+}
+
+/* La tarjeta blanca individual */
+.galerias-grid .views-row {
+  background-color: #ffffff;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  flex: 0 1 310px;         /* Tamaño fijo ideal para cada tarjeta */
+  width: 310px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* ======================================================
+    LA TARJETA DEL CENTRO ES MÁS GRANDE
+   ====================================================== */
+.galerias-grid .views-row:nth-child(2) {
+  transform: scale(1.12);  /* Agranda un 12% la tarjeta central */
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+  padding: 20px;
+  max-width: 340px;
+}
+
+/* Efecto hover interactivo */
+.galerias-grid .views-row:hover {
+  transform: translateY(-6px);
+}
+.galerias-grid .views-row:nth-child(2):hover {
+  transform: scale(1.14) translateY(-4px);
+}
+
+/* Imagen dentro de la tarjeta */
+.galerias-grid .views-row img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;     /* Redondeo de la foto interna */
+  display: block;
+}
+
+/* Texto del titular debajo de la foto */
+.galerias-grid .views-field-title a {
+  color: #374151;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.galerias-grid .views-field-title a:hover {
+  color: #00a499;
+}
+
+/* 3. BOTÓN INFERIOR "VER MÁS FOTOS" */
+.galerias-btn-wrapper {
+  margin-top: 50px;
+}
+
+.btn-ver-mas-fotos {
+  display: inline-block;
+  border: 1.8px solid #2b3b42; /* Borde oscuro elegante */
+  color: #2b3b42;
+  background-color: transparent;
+  border-radius: 25px;         /* Píldora */
+  padding: 9px 32px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-ver-mas-fotos:hover {
+  background-color: #2b3b42;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
