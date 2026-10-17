@@ -1,0 +1,22 @@
+name: 'Tema Historia'
+type: theme
+description: 'Plantilla personalizada Nivel 2 para el Departamento de Historia.'
+core_version_requirement: ^10 || ^11
+base theme: starterkit_theme
+
+# Aquí definimos las zonas de tu diseño
+regions:
+  header: 'Cabecera (Menú y Logo)'
+  hero: 'Banner Principal (Curso)'
+  content: 'Contenido del Sistema (Obligatorio)'
+  noticias: 'Sección Noticias'
+  galerias: 'Sección Galerías'
+  destacados: 'Sección Destacados'
+  videos: 'Sección Videos'
+  biblioteca: 'Biblioteca y Preguntas'
+  indicadores: 'Indicadores Numéricos'
+  footer: 'Pie de Página'
+
+# Aquí conectaremos tu CSS y JS más adelante
+libraries:
+  - tema_historia/global-styling

@@ -1,0 +1,20 @@
+{# 
+  Plantilla personalizada para la vista del Carrusel Hero.
+  Envuelve automáticamente cada banner creado por el administrador.
+#}
+<div class="custom-carousel">
+  
+  {# Pista con scroll nativo #}
+  <div class="carousel-track" id="carouselTrack">
+    {% for row in rows %}
+      <div class="carousel-slide">
+        {{ row.content }}
+      </div>
+    {% endfor %}
+  </div>
+
+  {# Flechas de navegación #}
+  <button type="button" class="carousel-btn prev" id="carouselPrev" aria-label="Anterior">&#10094;</button>
+  <button type="button" class="carousel-btn next" id="carouselNext" aria-label="Siguiente">&#10095;</button>
+
+</div>

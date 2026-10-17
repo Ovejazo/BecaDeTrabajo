@@ -1,0 +1,53 @@
+<header class="site-header">
+  <div class="container">
+    <div class="header-navbar">
+      {{ page.header }}
+    </div>
+  </div>
+</header>
+
+<section class="seccion-hero">
+  <div class="container">
+    {{ page.hero }}
+  </div>
+</section>
+
+{# ZONA OBLIGATORIA DE DRUPAL #}
+<main class="main-content">
+  <div class="container">
+    {{ page.content }}
+  </div>
+</main>
+
+<section class="seccion-noticias">
+  <div class="container">
+    <h2 class="titulo-seccion">Noticias</h2>
+    <div class="grid-3-columnas">
+      {{ page.noticias }}
+    </div>
+  </div>
+</section>
+
+<section class="seccion-galerias bg-gris">
+  <div class="container">
+    <h2 class="titulo-seccion">Galerías</h2>
+    <div class="grid-3-columnas">
+      {{ page.galerias }}
+    </div>
+  </div>
+</section>
+
+<section class="seccion-destacados bg-azul">
+  <div class="container">
+    <h2 class="titulo-seccion text-white">Destacados</h2>
+    <div class="grid-2-columnas">
+      {{ page.destacados }}
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    {{ page.footer }}
+  </div>
+</footer>
