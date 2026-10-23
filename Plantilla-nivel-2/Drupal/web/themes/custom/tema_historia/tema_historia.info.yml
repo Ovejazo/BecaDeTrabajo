@@ -13,8 +13,11 @@ regions:
   galerias: 'Sección Galerías'
   destacados: 'Sección Destacados'
   videos: 'Sección Videos'
-  biblioteca: 'Biblioteca y Preguntas'
+  biblioteca: 'Biblioteca (Tarjetas)'
+  biblioteca_titulo: 'Biblioteca (Título Círculo)'
+  faq: 'Preguntas Frecuentes'
   indicadores: 'Indicadores Numéricos'
+  redes: 'Banda Redes Sociales'
   footer: 'Pie de Página'
 
 # Aquí conectaremos tu CSS y JS más adelante

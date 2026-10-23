@@ -423,3 +423,743 @@ body {
   color: #ffffff;
   transform: translateY(-2px);
 }
+
+/* ======================================================
+   SECCIÓN DESTACADOS (FONDO PETRÓLEO Y ONDAS)
+   ====================================================== */
+
+.seccion-destacados {
+  /* Degradado verde petróleo profundo con efecto de luz */
+  background: linear-gradient(135deg, #00bcae 0%, #00a499 50%, #008a80 100%);
+  position: relative;
+  padding: 80px 0 90px 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* ONDAS SVG CURVAS */
+.onda-separador {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 1;
+}
+
+.onda-separador svg {
+  display: block;
+  width: 100%;
+  height: 60px; /* Altura de la curva */
+}
+
+.onda-superior {
+  top: 0;
+}
+
+.onda-inferior {
+  bottom: 0;
+}
+
+/* TÍTULO BLANCO */
+.destacados-titulo {
+  color: #ffffff;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin: 0 0 45px 0;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ======================================================
+   CUADRÍCULA DE 3 BANNERS EN FILA
+   ====================================================== */
+
+.destacados-grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Apuntamos al contenedor interno .view-content de Drupal */
+.destacados-grid .view-content,
+.destacados-grid .views-view-unformatted {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Cada tarjeta/banner */
+.destacados-grid .views-row {
+  flex: 0 1 340px;
+  max-width: 350px;
+  border-radius: 18px;     /* Esquinas redondeadas como la foto */
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* Sombra elegante sobre el fondo oscuro */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: transparent;
+}
+
+/* Efecto hover interactivo al pasar el ratón */
+.destacados-grid .views-row:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Imagen del banner */
+.destacados-grid .views-row img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+
+/* ======================================================
+   SECCIÓN VIDEOS
+   ====================================================== */
+
+.seccion-videos {
+  background-color: #f0f7f7; /* Mismo fondo celeste/gris suave que en la foto */
+  padding: 60px 0 75px 0;
+  text-align: center;
+}
+
+/* 1. TÍTULO CENTRADO */
+.videos-titulo {
+  color: #2b3b42;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 45px 0;
+  letter-spacing: 0.5px;
+}
+
+/* 2. CUADRÍCULA DE 3 TARJETAS EN FILA */
+.videos-grid .view-content,
+.videos-grid .views-view-unformatted {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;    /* Todas las tarjetas con la misma altura */
+  gap: 30px;
+  width: 100%;
+}
+
+/* La tarjeta blanca individual */
+.videos-grid .views-row {
+  background-color: #ffffff;
+  border-radius: 22px;     /* Bordes bien redondeados */
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  flex: 0 1 310px;         /* Mismo ancho para las 3 */
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover al pasar el ratón */
+.videos-grid .views-row:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen/miniatura dentro de la tarjeta */
+.videos-grid .views-row img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;     /* Esquinas redondeadas internas */
+  display: block;
+}
+
+/* Titular del video debajo de la foto */
+.videos-grid .views-field-title a {
+  color: #374151;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.videos-grid .views-field-title a:hover {
+  color: #00a499;
+}
+
+/* 3. BOTÓN INFERIOR "VER MÁS VIDEOS" */
+.videos-btn-wrapper {
+  margin-top: 50px;
+}
+
+.btn-ver-mas-videos {
+  display: inline-block;
+  border: 1.8px solid #2b3b42; /* Borde oscuro */
+  color: #2b3b42;
+  background-color: transparent;
+  border-radius: 25px;         /* Píldora */
+  padding: 9px 32px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-ver-mas-videos:hover {
+  background-color: #2b3b42;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ======================================================
+   SECCIÓN BIBLIOTECA DIGITAL (TARJETAS + CÍRCULO DERECHO)
+   ====================================================== */
+
+.seccion-biblioteca {
+  padding: 70px 0;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+/* 2 columnas: Grilla 3x2 a la izquierda y círculo a la derecha */
+.biblioteca-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 50px;
+  align-items: center;
+}
+
+/* ======================================================
+   1. GRILLA DE 6 TARJETAS (3 COLUMNAS X 2 FILAS)
+   ====================================================== */
+
+.biblioteca-col-cards .view-content,
+.biblioteca-col-cards .views-view-unformatted {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* La tarjeta blanca con el borde y sombra 3D turquesa */
+.biblioteca-col-cards .views-row {
+  background-color: #ffffff;
+  border-radius: 14px;
+  border: 1.5px solid #dcdfe4;
+  /* Sombra sólida turquesa en la esquina inferior derecha */
+  box-shadow: 5px 5px 0px #00a499;
+  padding: 24px 20px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Efecto hover interactivo */
+.biblioteca-col-cards .views-row:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0px #00a499;
+}
+
+/* Texto fino superior (Protocolo, Revista, Conversatorio...) */
+.biblioteca-col-cards .views-field-field-tipo-de-recurso {
+  font-size: 0.95rem;
+  color: #4b5563;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+/* Titular en negrita (Buenas Prácticas, Historia social...) */
+.biblioteca-col-cards .views-field-title a {
+  font-size: 1.05rem;
+  color: #1f2937;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s;
+}
+
+.biblioteca-col-cards .views-field-title a:hover {
+  color: #00a499;
+}
+
+/* ======================================================
+   2. CÍRCULO BICOLOR DERECHO
+   ====================================================== */
+
+.biblioteca-col-titulo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: -60px; /* Hace que el círculo sobresalga por la derecha */
+}
+
+.biblioteca-circulo {
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  border: 15px solid #00a499;
+  border-left-color: #2b3b42; /* Borde gris oscuro a la izquierda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.biblioteca-texto,
+.biblioteca-texto p,
+.biblioteca-texto h2 {
+  color: #00a499;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0 15px; /* Centrado perfecto sin desplazamiento */
+}
+
+.biblioteca-texto * {
+  text-align: center;
+}
+
+.biblioteca-texto p,
+.biblioteca-texto h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.biblioteca-texto p {
+  margin: 0;
+}
+
+/* ======================================================
+   SECCIÓN PREGUNTAS FRECUENTES (DESPLEGABLE / FAQ)
+   ====================================================== */
+
+.seccion-faq {
+  padding: 60px 0 80px 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.faq-desplegable {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* Quitar la flechita fea por defecto del navegador */
+.faq-trigger {
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+.faq-trigger::-webkit-details-marker {
+  display: none;
+}
+
+/* ======================================================
+   EL CARTEL MULTICAPA CON BORDE NARANJA Y VERDE
+   ====================================================== */
+
+.faq-caja-bocadillo {
+  position: relative;
+  width: 100%;
+  height: 85px;
+  margin-bottom: 20px;
+}
+
+/* Capas comunes */
+.faq-capa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease;
+}
+
+/* Capas traseras (el efecto 3D de hojas apiladas) */
+.capa-3 {
+  border: 2.5px solid #00a499;
+  transform: translate(12px, 12px);
+  z-index: 1;
+}
+
+.capa-2 {
+  border: 2.5px solid #00a499;
+  transform: translate(6px, 6px);
+  z-index: 2;
+}
+
+/* Capa principal frontal */
+.capa-frontal {
+  background-color: #ffffff;
+  /* Borde degradado: Naranja arriba y Turquesa abajo como en la foto */
+  border: 3px solid #00a499;
+  border-top-color: #e66400;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Colita de diálogo en la esquina inferior derecha */
+.capa-frontal::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: 18px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 15px solid #00a499;
+}
+
+/* Efecto hover interactivo en el botón */
+.faq-trigger:hover .capa-frontal {
+  transform: translateY(-2px);
+}
+.faq-trigger:hover .capa-2 {
+  transform: translate(8px, 8px);
+}
+.faq-trigger:hover .capa-3 {
+  transform: translate(16px, 16px);
+}
+
+/* Texto del título */
+.faq-titulo {
+  color: #2b3b42;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Flechita indicadora que rota al abrir */
+.faq-icono-flecha {
+  font-size: 1.2rem;
+  color: #00a499;
+  margin-left: 15px;
+  transition: transform 0.3s ease;
+}
+
+/* Cuando el usuario lo abre, la flecha gira */
+.faq-desplegable[open] .faq-icono-flecha {
+  transform: rotate(180deg);
+}
+
+/* ======================================================
+   CONTENEDOR DE PREGUNTAS Y RESPUESTAS (AL DESPLEGAR)
+   ====================================================== */
+
+.faq-respuestas-wrapper {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeInFaq 0.35s ease-in-out;
+}
+
+@keyframes fadeInFaq {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cada pregunta individual */
+.faq-item {
+  background-color: #f7fafb;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #00a499; /* Acento turquesa en el borde izquierdo */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.faq-item[open] {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-pregunta {
+  padding: 16px 20px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  list-style: none;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-pregunta::-webkit-details-marker {
+  display: none;
+}
+
+.faq-pregunta::after {
+  content: '+';
+  font-size: 1.3rem;
+  color: #00a499;
+  font-weight: bold;
+}
+
+.faq-item[open] .faq-pregunta::after {
+  content: '−';
+}
+
+.faq-respuesta {
+  padding: 0 20px 18px 20px;
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.faq-respuesta p {
+  margin: 0;
+}
+
+/* ======================================================
+   1. SECCIÓN INDICADORES (FONDO PLANO Y ESFERAS CON DEGRADADO)
+   ====================================================== */
+
+.seccion-indicadores {
+  background-color: #0c5e59; /* <- FONDO PLANO SÓLIDO */
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding: 60px 0 90px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.indicadores-titulo {
+  color: #ffffff;
+  font-size: 2.3rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin: 0 0 50px 0;
+}
+
+.indicadores-grid .view-content,
+.indicadores-grid .views-view-unformatted {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+/* LAS ESFERAS CON SU DEGRADADO (ESTÁTICAS, SIN MOVERSE CON EL MOUSE) */
+.indicadores-grid .views-row {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  /* Mantenemos el degradado con brillo inferior */
+  background: radial-gradient(circle at 50% 120%, #00bcae 0%, #0a4c46 60%, #042523 100%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  /* Ya no tiene hover ni transform: translateY */
+}
+
+/* El número grande */
+.indicadores-grid .views-field-field-cifra,
+.indicadores-grid .views-field-field-numero {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+/* La descripción pequeña */
+.indicadores-grid .views-field-title {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+/* ======================================================
+   2. SECCIÓN REDES SOCIALES (ICONOS POR POSICIÓN)
+   ====================================================== */
+
+.seccion-redes {
+  background-color: #ffffff;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding: 65px 0 75px 0; /* <- Aumentado: 65px arriba y 75px abajo para darle mucho más espacio */
+  margin-top: -35px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.seccion-redes ul.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.seccion-redes ul.menu li {
+  margin: 0;
+  padding: 0;
+}
+
+/* El círculo base */
+.seccion-redes ul.menu li a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1.8px solid #d1d5db;
+  font-size: 0 !important; /* Oculta cualquier texto que tenga */
+  color: transparent !important;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.seccion-redes ul.menu li a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* 1º CÍRCULO: FACEBOOK (Azul #1877f2) */
+.seccion-redes ul.menu li:nth-child(1) a {
+  border-color: #1877f2;
+  background-size: 22px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231877f2'%3E%3Cpath d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'/%3E%3C/svg%3E");
+}
+
+/* 2º CÍRCULO: X / TWITTER (Negro #000000) */
+.seccion-redes ul.menu li:nth-child(2) a {
+  border-color: #000000;
+  background-size: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000000'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E");
+}
+
+/* 3º CÍRCULO: YOUTUBE (Rojo #ff0000) */
+.seccion-redes ul.menu li:nth-child(3) a {
+  border-color: #ff0000;
+  background-size: 22px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff0000'%3E%3Cpath d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/%3E%3C/svg%3E");
+}
+
+/* 4º CÍRCULO: INSTAGRAM (Magenta #c13584) */
+.seccion-redes ul.menu li:nth-child(4) a {
+  border-color: #c13584;
+  background-size: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c13584'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E");
+}
+
+/* ======================================================
+   3. FOOTER INSTITUCIONAL (LOGOS EN FILA HORIZONTAL)
+   ====================================================== */
+
+.site-footer {
+  background-color: #00a499;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding: 45px 0;
+  margin-top: -35px;
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+}
+
+/* Alinea los párrafos con fotos en fila horizontal */
+.footer-institucional .field--name-body,
+.footer-institucional .field__item,
+.footer-institucional .content {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 30px !important;
+  flex-wrap: wrap !important;
+}
+
+.footer-institucional p {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+.footer-institucional img {
+  max-height: 55px; /* Altura máxima para que se vean proporcionados */
+  width: auto;
+  display: block;
+}
+
+/* ======================================================
+   3. FOOTER INSTITUCIONAL (IMÁGENES SUBIDAS POR TI)
+   ====================================================== */
+
+.site-footer {
+  background-color: #00a499; /* Verde turquesa institucional */
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding: 40px 0;
+  margin-top: -35px;
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+}
+
+/* Contenedor flexible para los logos */
+.footer-institucional .content,
+.footer-institucional .block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+}
+
+/* Las imágenes que subas al footer se verán nítidas y proporcionales */
+.footer-institucional img {
+  max-height: 55px; /* Altura ideal para logos */
+  width: auto;
+  display: block;
+}
+
+

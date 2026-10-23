@@ -56,17 +56,130 @@
   </div>
 </section>
 
-<section class="seccion-destacados bg-azul">
-  <div class="container">
-    <h2 class="titulo-seccion text-white">Destacados</h2>
-    <div class="grid-2-columnas">
+<section class="seccion-destacados">
+  
+  {# 1. Onda superior (color que coincide con el fondo claro de Galerías #f0f7f7) #}
+  <div class="onda-separador onda-superior">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C150,90 400,-20 650,60 C850,110 1050,10 1200,50 L1200,0 L0,0 Z" fill="#f0f7f7"></path>
+    </svg>
+  </div>
+
+  <div class="container destacados-container">
+    {# Título en blanco #}
+    <h2 class="destacados-titulo">Destacados</h2>
+
+    {# Las 3 tarjetas de banners #}
+    <div class="destacados-grid">
       {{ page.destacados }}
     </div>
   </div>
+
+  {# 2. Onda inferior (blanca para la sección siguiente) #}
+  <div class="onda-separador onda-inferior">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,70 C200,10 450,110 700,40 C950,-10 1100,80 1200,30 L1200,120 L0,120 Z" fill="#f0f7f7"></path>
+    </svg>
+  </div>
+
 </section>
 
-<footer class="site-footer">
+<section class="seccion-videos">
   <div class="container">
+    
+    {# 1. Título centrado #}
+    <h2 class="videos-titulo">Videos</h2>
+
+    {# 2. Las 3 tarjetas de Drupal #}
+    <div class="videos-grid">
+      {{ page.videos }}
+    </div>
+
+    {# 3. Botón inferior "VER MÁS VIDEOS" #}
+    <div class="videos-btn-wrapper">
+      <a href="/videos" class="btn-ver-mas-videos">VER MÁS VIDEOS</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="seccion-biblioteca">
+  <div class="container biblioteca-wrapper">
+    
+    {# 1. COLUMNA IZQUIERDA: Grilla de las 6 tarjetas de Drupal #}
+    <div class="biblioteca-col-cards">
+      {{ page.biblioteca }}
+    </div>
+
+    {# 2. COLUMNA DERECHA: Círculo con el título editable desde Drupal #}
+    <div class="biblioteca-col-titulo">
+      <div class="biblioteca-circulo">
+        <div class="biblioteca-texto">
+          {{ page.biblioteca_titulo }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="seccion-faq">
+  <div class="container">
+    
+    <details class="faq-desplegable">
+      
+      {# El botón principal con el diseño del bocadillo se mantiene #}
+      <summary class="faq-trigger">
+        <div class="faq-caja-bocadillo">
+          <div class="faq-capa capa-3"></div>
+          <div class="faq-capa capa-2"></div>
+          <div class="faq-capa capa-frontal">
+            <span class="faq-titulo">PREGUNTAS FRECUENTES</span>
+            <span class="faq-icono-flecha">▾</span>
+          </div>
+        </div>
+      </summary>
+
+      {# Las preguntas vendrán directamente desde Drupal #}
+      <div class="faq-respuestas-wrapper">
+        {{ page.faq }}
+      </div>
+
+    </details>
+
+  </div>
+</section>
+
+{# ======================================================
+   ZONAS EXCLUSIVAS DE LA PORTADA (INDICADORES Y REDES)
+   ====================================================== #}
+{% if is_front %}
+
+  {# 1. BANDA TURQUESA OSCURA: INDICADORES #}
+  <section class="seccion-indicadores">
+    <div class="container">
+      <h2 class="indicadores-titulo">INDICADORES</h2>
+      <div class="indicadores-grid">
+        {{ page.indicadores }}
+      </div>
+    </div>
+  </section>
+
+  {# 2. BANDA BLANCA: REDES SOCIALES (Gestionadas desde Drupal) #}
+  <section class="seccion-redes">
+    <div class="container">
+      {{ page.redes }}
+    </div>
+  </section>
+
+{% endif %}
+
+{# ======================================================
+   3. BANDA TURQUESA INFERIOR: FOOTER (GLOBAL)
+   ====================================================== #}
+<footer class="site-footer">
+  <div class="container footer-institucional">
+    {# Aquí saldrá el bloque con las imágenes que tú mismo subas en Drupal #}
     {{ page.footer }}
   </div>
 </footer>
