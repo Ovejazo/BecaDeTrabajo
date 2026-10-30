@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Plantilla para renderizar el campo Fotos del Carrusel como un carrusel dinámico.
+ */
+#}
+<div class="custom-carousel">
+  <div class="carousel-track">
+    {% for item in items %}
+      <div class="carousel-slide">
+        {{ item.content }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <button class="carousel-btn prev" type="button" aria-label="Anterior">&#10094;</button>
+  <button class="carousel-btn next" type="button" aria-label="Siguiente">&#10095;</button>
+</div>

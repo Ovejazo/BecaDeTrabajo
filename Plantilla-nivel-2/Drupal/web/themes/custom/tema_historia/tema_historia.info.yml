@@ -9,6 +9,7 @@ regions:
   header: 'Cabecera (Menú y Logo)'
   hero: 'Banner Principal (Curso)'
   content: 'Contenido del Sistema (Obligatorio)'
+  sidebar_first: 'Barra lateral (Páginas internas)'
   noticias: 'Sección Noticias'
   galerias: 'Sección Galerías'
   destacados: 'Sección Destacados'

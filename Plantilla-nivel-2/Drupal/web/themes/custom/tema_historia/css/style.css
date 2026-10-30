@@ -15,7 +15,8 @@
 .header-navbar {
   background-color: #00a499; /* Verde turquesa USACH */
   border-radius: 35px;       /* Forma de cápsula */
-  padding: 8px 32px;
+  padding: 10px 28px;
+
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
@@ -84,6 +85,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  width: 100%;
 }
 
 /* AQUÍ ESTÁ EL CAMBIO: Apuntamos al contenedor interno de Drupal */
@@ -165,6 +167,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.2s;
@@ -203,31 +206,35 @@ body {
 /* 2 columnas: Círculo a la izquierda y tarjetas a la derecha */
 .noticias-wrapper {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 180px 1fr;
   gap: 40px;
   align-items: center;
 }
 
 /* 1. EL CÍRCULO BICOLOR (TURQUESA Y GRIS) */
 .noticias-col-titulo {
+  margin-left: -90px;
   display: flex;
   justify-content: center;
+
   align-items: center;
 }
 
 .noticias-circulo {
-  width: 240px;
-  height: 240px;
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
-  border: 14px solid #00a499;
+  border: 15px solid #00a499;
   border-right-color: #2b3b42; /* Borde gris oscuro a la derecha */
   display: flex;
   align-items: center;
   justify-content: center;
+
   box-sizing: border-box;
 }
 
 .noticias-texto {
+  text-align: center;
   color: #00a499;
   font-size: 2.3rem;
   font-weight: 700;
@@ -236,11 +243,21 @@ body {
 }
 
 /* 2. CUADRÍCULA DE 3 TARJETAS */
-.noticias-col-contenido .views-view-unformatted,
-.noticias-col-contenido .region-noticias {
+.noticias-col-contenido,
+.noticias-col-contenido .region,
+.noticias-col-contenido .region-noticias,
+.noticias-col-contenido .views-element-container,
+.noticias-col-contenido .view {
+  width: 100%;
+}
+
+.noticias-col-contenido .view-content,
+
+.noticias-col-contenido .views-view-unformatted {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  width: 100%;
 }
 
 .noticias-col-contenido .views-row {
@@ -253,11 +270,18 @@ body {
 /* Imagen de la noticia con esquinas redondeadas y sombra */
 .noticias-col-contenido .views-row img {
   width: 100%;
-  height: 180px;
+  height: 195px;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: block;
+}
+
+.noticias-col-contenido .views-row:hover img {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
 }
 
 /* Titular de la noticia */
@@ -330,9 +354,11 @@ body {
 .galerias-grid .view-content,
 .galerias-grid .views-view-unformatted {
   display: flex;
-  justify-content: center; /* Centra las 3 tarjetas en la pantalla */
+  justify-content: center;
+ /* Centra las 3 tarjetas en la pantalla */
   align-items: center;     /* Alinea verticalmente para que la del medio sobresalga */
-  gap: 30px;               /* Separación entre tarjetas */
+  gap: 30px;
+  width: 100%;               /* Separación entre tarjetas */
   width: 100%;
 }
 
@@ -486,8 +512,10 @@ body {
 .destacados-grid .views-view-unformatted {
   display: flex;
   justify-content: center;
+
   align-items: center;
   gap: 30px;
+  width: 100%;
   flex-wrap: wrap;
 }
 
@@ -541,8 +569,10 @@ body {
 .videos-grid .views-view-unformatted {
   display: flex;
   justify-content: center;
+
   align-items: stretch;    /* Todas las tarjetas con la misma altura */
   gap: 30px;
+  width: 100%;
   width: 100%;
 }
 
@@ -662,6 +692,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   transition: all 0.25s ease;
   box-sizing: border-box;
   text-align: left;
@@ -717,6 +748,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-align: center;
   box-sizing: border-box;
 }
@@ -755,6 +787,7 @@ body {
   background-color: #ffffff;
   display: flex;
   justify-content: center;
+
 }
 
 .faq-desplegable {
@@ -819,6 +852,7 @@ body {
   z-index: 3;
   display: flex;
   justify-content: center;
+
   align-items: center;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -965,6 +999,7 @@ body {
 .indicadores-grid .views-view-unformatted {
   display: flex;
   justify-content: center;
+
   align-items: center;
   gap: 35px;
   flex-wrap: wrap;
@@ -981,6 +1016,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   align-items: center;
   padding: 16px;
   box-sizing: border-box;
@@ -1025,6 +1061,7 @@ body {
 .seccion-redes ul.menu {
   display: flex;
   justify-content: center;
+
   align-items: center;
   gap: 26px;
   list-style: none;
@@ -1041,6 +1078,7 @@ body {
 .seccion-redes ul.menu li a {
   display: inline-flex;
   justify-content: center;
+
   align-items: center;
   width: 52px;
   height: 52px;
@@ -1153,6 +1191,7 @@ body {
   flex-wrap: wrap;
   gap: 30px;
   width: 100%;
+  width: 100%;
 }
 
 /* Las imágenes que subas al footer se verán nítidas y proporcionales */
@@ -1161,5 +1200,328 @@ body {
   width: auto;
   display: block;
 }
+
+
+
+
+/* ======================================================
+   OCULTAR SECCIONES AUTOMÁTICAMENTE SI NO TIENEN CONTENIDO
+   ====================================================== */
+
+/* Si la vista de destacados no tiene filas/banners (.views-row), oculta la sección completa con sus ondas y título */
+.seccion-destacados:not(:has(.views-row)) {
+  display: none !important;
+}
+
+/* Si la vista de galerías no tiene fotos, oculta la sección completa con su título y botón */
+.seccion-galerias:not(:has(.views-row)) {
+  display: none !important;
+}
+
+/* Si la vista de videos no tiene videos, oculta la sección con su título y botón */
+.seccion-videos:not(:has(.views-row)) {
+  display: none !important;
+}
+
+/* Si la vista de noticias no tiene noticias, oculta la sección con su círculo */
+.seccion-noticias:not(:has(.views-row)) {
+  display: none !important;
+}
+
+/* Si no hay preguntas frecuentes cargadas, oculta el desplegable */
+.seccion-faq:not(:has(.views-row, details, .faq-item)) {
+  display: none !important;
+}
+
+/* Si no hay indicadores numéricos, oculta la franja */
+.seccion-indicadores:not(:has(.views-row, .indicador-esfera)) {
+  display: none !important;
+}
+
+/* Si la biblioteca no tiene tarjetas */
+.seccion-biblioteca:not(:has(.views-row)) {
+  display: none !important;
+}
+
+
+/* ======================================================
+   ESTILOS PARA PÁGINAS INTERNAS (/departamento, /programas, etc.)
+   ====================================================== */
+.pagina-interna {
+  padding: 50px 0 90px 0;
+  min-height: 520px;
+  background-color: #ffffff;
+}
+
+.pagina-interna h1,
+.pagina-interna .page-title {
+  color: #00a499;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #00a499;
+  padding-bottom: 12px;
+  display: inline-block;
+}
+
+/* ======================================================
+   APARTADO DE NOTICIAS EN PÁGINAS INTERNAS (/departamento)
+   ====================================================== */
+
+.noticias-departamento,
+.pagina-interna .block:has(.noticias-departamento),
+.pagina-interna .block[class*="noticias"],
+.pagina-interna .block-views-blocknoticias-departamento,
+.pagina-interna .view-noticias-departamento {
+  margin-top: 75px !important;
+  margin-bottom: 45px;
+  width: 100%;
+}
+
+/* 1. Título simple "Noticias" arriba a la izquierda */
+.pagina-interna .block:has(.noticias-departamento) > h2,
+.pagina-interna .block[class*="noticias"] > h2,
+.noticias-departamento h2,
+.noticias-departamento .block-title,
+.noticias-departamento .view-header h2 {
+  color: #2b3b42;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 35px;
+  text-align: left;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* 2. Cuadrícula de 3 columnas horizontales */
+.noticias-departamento .view-content,
+.noticias-departamento .views-view-unformatted {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+  width: 100%;
+}
+
+/* 3. Tarjeta individual con la barra turquesa inferior */
+.noticias-departamento .views-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 18px;
+  border-bottom: 4px solid #00a499; /* La línea turquesa característica */
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* 4. Imagen apaisada */
+.noticias-departamento .views-row img {
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+/* 5. Título de la noticia en verde azulado institucional */
+.noticias-departamento .views-field-title,
+.noticias-departamento .views-field-title a,
+.noticias-departamento .views-field-title span {
+  color: #00a499;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+  margin: 4px 0 0 0;
+  transition: opacity 0.2s;
+}
+
+.noticias-departamento .views-field-title a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* 6. Fecha de publicación en gris */
+.noticias-departamento .views-field-created {
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* 7. Enlace "Ver más" como texto turquesa */
+.noticias-departamento .views-field-view-node a {
+  color: #00a499;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.noticias-departamento .views-field-view-node a:hover {
+  text-decoration: underline;
+}
+
+/* 8. Botón "MÁS NOTICIAS" al pie de la sección */
+.noticias-departamento .more-link,
+.noticias-departamento .mas-noticias-wrapper {
+  text-align: center;
+  margin-top: 45px;
+  width: 100%;
+}
+
+.noticias-departamento .more-link a,
+.noticias-departamento .btn-mas-noticias,
+.btn-mas-noticias {
+  display: inline-block;
+  color: #e66400;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.noticias-departamento .more-link a:hover,
+.noticias-departamento .btn-mas-noticias:hover,
+.btn-mas-noticias:hover {
+  color: #c95500;
+  text-decoration: underline;
+}
+
+/* Ocultar el bloque de noticias de departamento si no hay noticias */
+.pagina-interna .block:has(.noticias-departamento:not(:has(.views-row))),
+.noticias-departamento:not(:has(.views-row)) {
+  display: none !important;
+}
+
+.pagina-interna p {
+  color: #374151;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+/* ======================================================
+   LAYOUT 2 COLUMNAS PARA PÁGINAS INTERNAS (SIDEBAR + CONTENIDO)
+   ====================================================== */
+
+.layout-dos-columnas {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 65px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.col-sidebar {
+  width: 100%;
+}
+
+.col-contenido {
+  width: 100%;
+  min-width: 0;
+}
+
+.col-contenido-completo {
+  width: 100%;
+}
+
+/* 1. Título del contenido en la columna derecha */
+.col-contenido h1,
+.col-contenido h2,
+.col-contenido .page-title {
+  color: #2b3b42 !important;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.col-contenido p {
+  color: #374151;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+.col-contenido p strong,
+.col-contenido p b {
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.col-sidebar h2,
+.col-sidebar .block-title {
+  color: #2b3b42;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* 2. Lista de enlaces de la barra lateral izquierda */
+.col-sidebar ul,
+.col-sidebar .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.col-sidebar ul li,
+.col-sidebar .menu li {
+  position: relative;
+  padding: 13px 0 13px 24px;
+  border-bottom: 1.5px solid #e66400; /* La línea divisoria naranja institucional */
+  margin: 0;
+  list-style: none;
+}
+
+/* Viñeta circular gris a la izquierda */
+.col-sidebar ul li::before,
+.col-sidebar .menu li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8; /* Gris medio */
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.col-sidebar ul li a,
+.col-sidebar .menu li a {
+  color: #4b5563;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.col-sidebar ul li a:hover,
+.col-sidebar .menu li a:hover {
+  color: #00a499; /* Turquesa USACH al pasar el cursor */
+  transform: translateX(3px);
+}
+
+/* Enlace activo de la página donde estás parado actualmente (en naranja como en el ejemplo) */
+.col-sidebar ul li a.is-active,
+.col-sidebar .menu li a.is-active,
+.col-sidebar ul li.is-active a,
+.col-sidebar .menu li.is-active a,
+.col-sidebar ul li.menu-item--active-trail > a,
+.col-sidebar .menu li.menu-item--active-trail > a {
+  color: #e66400 !important; /* Naranja activo */
+  font-weight: 700;
+}
+
 
 

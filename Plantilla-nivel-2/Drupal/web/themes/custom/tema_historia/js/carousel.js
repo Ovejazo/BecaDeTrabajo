@@ -1,48 +1,59 @@
 (function (Drupal) {
   Drupal.behaviors.customCarousel = {
     attach: function (context) {
-      const track = context.querySelector('#carouselTrack');
-      const prevBtn = context.querySelector('#carouselPrev');
-      const nextBtn = context.querySelector('#carouselNext');
+      // Soporta tanto la clase .custom-carousel como el id tradicional
+      const carousels = context.querySelectorAll ? context.querySelectorAll('.custom-carousel') : [];
 
-      // Si no están en la página o ya se inicializaron, salimos
-      if (!track || !prevBtn || !nextBtn || track.dataset.initialized) return;
-      track.dataset.initialized = 'true';
-
-      // Avanzar al siguiente banner
-      function slideNext() {
-        const slideWidth = track.clientWidth;
-        // Si llega al final, vuelve al inicio
-        if (track.scrollLeft + slideWidth >= track.scrollWidth - 10) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+      // Si no encuentra por clase, busca el carrusel clásico por ID
+      if (carousels.length === 0) {
+        const track = context.querySelector ? context.querySelector('#carouselTrack') : null;
+        if (track && !track.dataset.initialized) {
+          initSingleCarousel(track, context.querySelector('#carouselPrev'), context.querySelector('#carouselNext'), track.parentElement);
         }
+        return;
       }
 
-      // Retroceder al banner anterior
-      function slidePrev() {
-        const slideWidth = track.clientWidth;
-        // Si está en el inicio, salta al último
-        if (track.scrollLeft <= 10) {
-          track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+      carousels.forEach(function (carousel) {
+        const track = carousel.querySelector('.carousel-track') || carousel.querySelector('#carouselTrack');
+        const prevBtn = carousel.querySelector('.carousel-btn.prev') || carousel.querySelector('#carouselPrev');
+        const nextBtn = carousel.querySelector('.carousel-btn.next') || carousel.querySelector('#carouselNext');
+        if (track && prevBtn && nextBtn && !track.dataset.initialized) {
+          initSingleCarousel(track, prevBtn, nextBtn, carousel);
         }
-      }
-
-      // Escuchar clics en los botones
-      nextBtn.addEventListener('click', slideNext);
-      prevBtn.addEventListener('click', slidePrev);
-
-      // Cambio automático cada 6 segundos
-      let timer = setInterval(slideNext, 6000);
-
-      // Si el usuario pasa el mouse por encima, se pausa el carrusel
-      track.parentElement.addEventListener('mouseenter', () => clearInterval(timer));
-      track.parentElement.addEventListener('mouseleave', () => {
-        timer = setInterval(slideNext, 6000);
       });
+
+      function initSingleCarousel(track, prevBtn, nextBtn, container) {
+        track.dataset.initialized = 'true';
+
+        function slideNext() {
+          const slideWidth = track.clientWidth;
+          if (track.scrollLeft + slideWidth >= track.scrollWidth - 15) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+          }
+        }
+
+        function slidePrev() {
+          const slideWidth = track.clientWidth;
+          if (track.scrollLeft <= 15) {
+            track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+          } else {
+            track.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+          }
+        }
+
+        nextBtn.addEventListener('click', slideNext);
+        prevBtn.addEventListener('click', slidePrev);
+
+        let timer = setInterval(slideNext, 6000);
+        if (container) {
+          container.addEventListener('mouseenter', () => clearInterval(timer));
+          container.addEventListener('mouseleave', () => {
+            timer = setInterval(slideNext, 6000);
+          });
+        }
+      }
     }
   };
 })(Drupal);

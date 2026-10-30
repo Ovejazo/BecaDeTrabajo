@@ -6,180 +6,218 @@
   </div>
 </header>
 
-<section class="seccion-hero">
-  <div class="container">
-    {{ page.hero }}
-  </div>
-</section>
-
-{# ZONA OBLIGATORIA DE DRUPAL #}
-<main class="main-content">
-  <div class="container">
-    {{ page.content }}
-  </div>
-</main>
-
-<section class="seccion-noticias">
-  <div class="container noticias-wrapper">
-    
-    {# 1. COLUMNA IZQUIERDA: Círculo decorativo con título #}
-    <div class="noticias-col-titulo">
-      <div class="noticias-circulo">
-        <h2 class="noticias-texto">Noticias</h2>
-      </div>
-    </div>
-
-    {# 2. COLUMNA DERECHA: Las 3 noticias que vienen desde Drupal #}
-    <div class="noticias-col-contenido">
-      {{ page.noticias }}
-    </div>
-
-  </div>
-</section>
-
-<section class="seccion-galerias">
-  <div class="container">
-    
-    {# 1. Título centrado #}
-    <h2 class="galerias-titulo">Galerías</h2>
-
-    {# 2. Las 3 tarjetas de Drupal #}
-    <div class="galerias-grid">
-      {{ page.galerias }}
-    </div>
-
-    {# 3. Botón inferior "VER MÁS FOTOS" #}
-    <div class="galerias-btn-wrapper">
-      <a href="/galerias" class="btn-ver-mas-fotos">VER MÁS FOTOS</a>
-    </div>
-
-  </div>
-</section>
-
-<section class="seccion-destacados">
-  
-  {# 1. Onda superior (color que coincide con el fondo claro de Galerías #f0f7f7) #}
-  <div class="onda-separador onda-superior">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M0,0 C150,90 400,-20 650,60 C850,110 1050,10 1200,50 L1200,0 L0,0 Z" fill="#f0f7f7"></path>
-    </svg>
-  </div>
-
-  <div class="container destacados-container">
-    {# Título en blanco #}
-    <h2 class="destacados-titulo">Destacados</h2>
-
-    {# Las 3 tarjetas de banners #}
-    <div class="destacados-grid">
-      {{ page.destacados }}
-    </div>
-  </div>
-
-  {# 2. Onda inferior (blanca para la sección siguiente) #}
-  <div class="onda-separador onda-inferior">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M0,70 C200,10 450,110 700,40 C950,-10 1100,80 1200,30 L1200,120 L0,120 Z" fill="#f0f7f7"></path>
-    </svg>
-  </div>
-
-</section>
-
-<section class="seccion-videos">
-  <div class="container">
-    
-    {# 1. Título centrado #}
-    <h2 class="videos-titulo">Videos</h2>
-
-    {# 2. Las 3 tarjetas de Drupal #}
-    <div class="videos-grid">
-      {{ page.videos }}
-    </div>
-
-    {# 3. Botón inferior "VER MÁS VIDEOS" #}
-    <div class="videos-btn-wrapper">
-      <a href="/videos" class="btn-ver-mas-videos">VER MÁS VIDEOS</a>
-    </div>
-
-  </div>
-</section>
-
-<section class="seccion-biblioteca">
-  <div class="container biblioteca-wrapper">
-    
-    {# 1. COLUMNA IZQUIERDA: Grilla de las 6 tarjetas de Drupal #}
-    <div class="biblioteca-col-cards">
-      {{ page.biblioteca }}
-    </div>
-
-    {# 2. COLUMNA DERECHA: Círculo con el título editable desde Drupal #}
-    <div class="biblioteca-col-titulo">
-      <div class="biblioteca-circulo">
-        <div class="biblioteca-texto">
-          {{ page.biblioteca_titulo }}
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="seccion-faq">
-  <div class="container">
-    
-    <details class="faq-desplegable">
-      
-      {# El botón principal con el diseño del bocadillo se mantiene #}
-      <summary class="faq-trigger">
-        <div class="faq-caja-bocadillo">
-          <div class="faq-capa capa-3"></div>
-          <div class="faq-capa capa-2"></div>
-          <div class="faq-capa capa-frontal">
-            <span class="faq-titulo">PREGUNTAS FRECUENTES</span>
-            <span class="faq-icono-flecha">▾</span>
-          </div>
-        </div>
-      </summary>
-
-      {# Las preguntas vendrán directamente desde Drupal #}
-      <div class="faq-respuestas-wrapper">
-        {{ page.faq }}
-      </div>
-
-    </details>
-
-  </div>
-</section>
-
 {# ======================================================
-   ZONAS EXCLUSIVAS DE LA PORTADA (INDICADORES Y REDES)
+   SI ESTAMOS EN LA PORTADA: Mostramos todo el diseño institucional
    ====================================================== #}
 {% if is_front %}
 
-  {# 1. BANDA TURQUESA OSCURA: INDICADORES #}
-  <section class="seccion-indicadores">
-    <div class="container">
-      <h2 class="indicadores-titulo">INDICADORES</h2>
-      <div class="indicadores-grid">
-        {{ page.indicadores }}
+  {# 1. BANNER HERO PRINCIPAL #}
+  {% if page.hero %}
+    <section class="seccion-hero">
+      <div class="container">
+        {{ page.hero }}
       </div>
-    </div>
-  </section>
+    </section>
+  {% endif %}
 
-  {# 2. BANDA BLANCA: REDES SOCIALES (Gestionadas desde Drupal) #}
-  <section class="seccion-redes">
+  {# 2. SECCIÓN NOTICIAS #}
+  {% if page.noticias %}
+    <section class="seccion-noticias">
+      <div class="container noticias-wrapper">
+        
+        {# Columna izquierda: Círculo decorativo con título #}
+        <div class="noticias-col-titulo">
+          <div class="noticias-circulo">
+            <h2 class="noticias-texto">Noticias</h2>
+          </div>
+        </div>
+
+        {# Columna derecha: Tarjetas de noticias #}
+        <div class="noticias-col-contenido">
+          {{ page.noticias }}
+        </div>
+
+      </div>
+    </section>
+  {% endif %}
+
+  {# 3. SECCIÓN GALERÍAS #}
+  {% if page.galerias %}
+    <section class="seccion-galerias">
+      <div class="container">
+        
+        <h2 class="galerias-titulo">Galerías</h2>
+
+        <div class="galerias-grid">
+          {{ page.galerias }}
+        </div>
+
+        <div class="galerias-btn-wrapper">
+          <a href="/galerias" class="btn-ver-mas-fotos">VER MÁS FOTOS</a>
+        </div>
+
+      </div>
+    </section>
+  {% endif %}
+
+  {# 4. SECCIÓN DESTACADOS #}
+  {% if page.destacados %}
+    <section class="seccion-destacados">
+      
+      {# Onda superior #}
+      <div class="onda-separador onda-superior">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 400,-20 650,60 C850,110 1050,10 1200,50 L1200,0 L0,0 Z" fill="#f0f7f7"></path>
+        </svg>
+      </div>
+
+      <div class="container destacados-container">
+        <h2 class="destacados-titulo">Destacados</h2>
+        <div class="destacados-grid">
+          {{ page.destacados }}
+        </div>
+      </div>
+
+      {# Onda inferior #}
+      <div class="onda-separador onda-inferior">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,70 C200,10 450,110 700,40 C950,-10 1100,80 1200,30 L1200,120 L0,120 Z" fill="#f0f7f7"></path>
+        </svg>
+      </div>
+
+    </section>
+  {% endif %}
+
+  {# 5. SECCIÓN VIDEOS #}
+  {% if page.videos %}
+    <section class="seccion-videos">
+      <div class="container">
+        
+        <h2 class="videos-titulo">Videos</h2>
+
+        <div class="videos-grid">
+          {{ page.videos }}
+        </div>
+
+        <div class="videos-btn-wrapper">
+          <a href="/videos" class="btn-ver-mas-videos">VER MÁS VIDEOS</a>
+        </div>
+
+      </div>
+    </section>
+  {% endif %}
+
+  {# 6. SECCIÓN BIBLIOTECA #}
+  {% if page.biblioteca or page.biblioteca_titulo %}
+    <section class="seccion-biblioteca">
+      <div class="container biblioteca-wrapper">
+        
+        <div class="biblioteca-col-cards">
+          {{ page.biblioteca }}
+        </div>
+
+        <div class="biblioteca-col-titulo">
+          <div class="biblioteca-circulo">
+            <div class="biblioteca-texto">
+              {{ page.biblioteca_titulo }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  {% endif %}
+
+  {# 7. SECCIÓN PREGUNTAS FRECUENTES #}
+  {% if page.faq %}
+    <section class="seccion-faq">
+      <div class="container">
+        
+        <details class="faq-desplegable">
+          
+          <summary class="faq-trigger">
+            <div class="faq-caja-bocadillo">
+              <div class="faq-capa capa-3"></div>
+              <div class="faq-capa capa-2"></div>
+              <div class="faq-capa capa-frontal">
+                <span class="faq-titulo">PREGUNTAS FRECUENTES</span>
+                <span class="faq-icono-flecha">▾</span>
+              </div>
+            </div>
+          </summary>
+
+          <div class="faq-respuestas-wrapper">
+            {{ page.faq }}
+          </div>
+
+        </details>
+
+      </div>
+    </section>
+  {% endif %}
+
+  {# 8. INDICADORES #}
+  {% if page.indicadores %}
+    <section class="seccion-indicadores">
+      <div class="container">
+        <h2 class="indicadores-titulo">INDICADORES</h2>
+        <div class="indicadores-grid">
+          {{ page.indicadores }}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {# 9. BANDA BLANCA: REDES SOCIALES #}
+  {% if page.redes %}
+    <section class="seccion-redes">
+      <div class="container">
+        {{ page.redes }}
+      </div>
+    </section>
+  {% endif %}
+
+{% else %}
+
+  {# ======================================================
+     EN CUALQUIER PÁGINA INTERNA (/departamento, /programas, etc.)
+     ====================================================== #}
+  {% if page.hero %}
+    <section class="seccion-hero">
+      <div class="container">
+        {{ page.hero }}
+      </div>
+    </section>
+  {% endif %}
+
+  <main class="main-content pagina-interna">
     <div class="container">
-      {{ page.redes }}
+      {% if page.sidebar_first %}
+        <div class="layout-dos-columnas">
+          <aside class="col-sidebar">
+            {{ page.sidebar_first }}
+          </aside>
+          <div class="col-contenido">
+            {{ page.content }}
+          </div>
+        </div>
+      {% else %}
+        <div class="col-contenido-completo">
+          {{ page.content }}
+        </div>
+      {% endif %}
     </div>
-  </section>
+  </main>
 
 {% endif %}
 
 {# ======================================================
-   3. BANDA TURQUESA INFERIOR: FOOTER (GLOBAL)
+   PIE DE PÁGINA INSTITUCIONAL (GLOBAL)
    ====================================================== #}
-<footer class="site-footer">
-  <div class="container footer-institucional">
-    {# Aquí saldrá el bloque con las imágenes que tú mismo subas en Drupal #}
-    {{ page.footer }}
-  </div>
-</footer>
+{% if page.footer %}
+  <footer class="site-footer">
+    <div class="container footer-institucional">
+      {{ page.footer }}
+    </div>
+  </footer>
+{% endif %}
