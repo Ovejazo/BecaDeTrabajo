@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Plantilla del bloque Sección Actividades (Fechas) - USACH Nivel 3.
+ */
+#}
+<section class="section-actividades" id="actividades">
+    <div class="container">
+        <div class="actividades-layout">
+            <div class="actividades-badge-box">
+                <img src="{{ base_path ~ directory }}/images/calendar-days.png" alt="Calendario" class="actividades-calendar-icon-img">
+                <span class="actividades-badge-title">{{ seccion_titulo|default('Actividades') }}</span>
+            </div>
+
+            <div class="actividades-list">
+              {% if actividades_proximas is not empty %}
+                {% for act in actividades_proximas %}
+                  <div class="actividad-card">
+                      <div class="actividad-date-box">
+                          <div class="actividad-day">{{ act.dia ?: act.day }}</div>
+                          <div class="actividad-month">{{ act.mes ?: act.month }}</div>
+                      </div>
+                      <div class="actividad-desc">
+                          {% if act.enlace and act.enlace != '#' %}
+                              <a href="{{ act.enlace }}" style="color: inherit; text-decoration: none;">{{ act.titulo ?: act.title }}</a>
+                          {% else %}
+                              {{ act.titulo ?: act.title }}
+                          {% endif %}
+                      </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="actividad-card">
+                    <div class="actividad-date-box">
+                        <div class="actividad-day">20</div>
+                        <div class="actividad-month">de agosto</div>
+                    </div>
+                    <div class="actividad-desc">
+                        Convocatoria para el concurso de Ensayos Breves IDEA 2026
+                    </div>
+                </div>
+
+                <div class="actividad-card">
+                    <div class="actividad-date-box">
+                        <div class="actividad-day">07</div>
+                        <div class="actividad-month">de septiembre</div>
+                    </div>
+                    <div class="actividad-desc">
+                        Última fecha para presentar ponencias "X Jornadas de Estudios Internacionales"
+                    </div>
+                </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

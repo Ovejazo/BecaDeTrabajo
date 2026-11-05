@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Plantilla del bloque Accesos Rápidos - USACH Nivel 3.
+ */
+#}
+<section class="section-quick-pills">
+    <div class="container quick-pills-grid">
+        {# Píldora 1 #}
+        <a href="{{ pildora_1_url|default('#admision') }}" class="quick-pill-card">
+            <img src="{{ pildora_1_icon_url ?: (base_path ~ directory ~ '/images/gorro-de-graduacion.png') }}" alt="{{ pildora_1_title|default('Admisión') }}" class="quick-pill-icon-img">
+            <span class="quick-pill-title">{{ pildora_1_title|default('Admisión') }}</span>
+        </a>
+
+        {# Píldora 2 #}
+        <a href="{{ pildora_2_url|default('#doctorados') }}" class="quick-pill-card">
+            <img src="{{ pildora_2_icon_url ?: (base_path ~ directory ~ '/images/libro.png') }}" alt="{{ pildora_2_title|default('Doctorados') }}" class="quick-pill-icon-img">
+            <span class="quick-pill-title">{{ pildora_2_title|default('Doctorados') }}</span>
+        </a>
+
+        {# Píldora 3 #}
+        <a href="{{ pildora_3_url|default('#magisteres') }}" class="quick-pill-card">
+            <img src="{{ pildora_3_icon_url ?: (base_path ~ directory ~ '/images/escribir.png') }}" alt="{{ pildora_3_title|default('Magísteres') }}" class="quick-pill-icon-img">
+            <span class="quick-pill-title">{{ pildora_3_title|default('Magísteres') }}</span>
+        </a>
+    </div>
+</section>

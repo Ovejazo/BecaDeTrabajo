@@ -1,0 +1,202 @@
+{#
+/**
+ * @file
+ * Plantilla de página de inicio (Front Page) - USACH Nivel 3.
+ * Arquitectura modular 100% nativa con Regiones y Bloques de Drupal.
+ */
+#}
+
+<!-- ========================================================================
+     1. HEADER INSTITUCIONAL (Curvas inferiores de 35px)
+     ======================================================================== -->
+<header class="site-header">
+    <div class="header-inner">
+        <div class="site-branding">
+            <a href="{{ front_page }}">
+                <img src="{{ base_path ~ directory }}/images/Usach-P1.png" alt="USACH" class="header-logo-img">
+                <div class="site-title-group">
+                    <span class="site-sublabel">INSTITUTO DE</span>
+                    <span class="site-main-title">ESTUDIOS AVANZADOS</span>
+                </div>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="mobileMenuBtnN3" aria-label="Abrir Menú">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-navigation" id="siteNavN3">
+            <ul class="nav-menu-list">
+                <li><a href="{{ front_page }}" class="is-active">Inicio</a></li>
+                <li><a href="{{ base_path }}nosotros">Nosotros</a></li>
+                <li><a href="{{ base_path }}programas">Programas</a></li>
+                <li><a href="{{ base_path }}investigacion">Investigación</a></li>
+                <li><a href="{{ base_path }}vinculacion">Vinculación con el medio</a></li>
+                <li><a href="{{ base_path }}publicaciones">Publicaciones</a></li>
+                <li><a href="{{ base_path }}biblioteca">Biblioteca</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main id="main-content">
+
+    <!-- ====================================================================
+         2. HERO / SLIDER PRINCIPAL CON BOTONES INTERACTIVOS
+         ==================================================================== -->
+    {% if page.hero %}
+        {{ page.hero }}
+    {% else %}
+        <section class="section-hero-split">
+            <div class="container hero-split-grid">
+                <div class="hero-split-content">
+                    <h1 id="heroSlideTitle">Revisa las<br>colecciones</h1>
+                    <p id="heroSlideDesc">Buscamos fomentar la difusión de ideas y ser un aporte significativo en el avance de los estudios sociales y políticos, las artes y las humanidades.</p>
+                    <a href="#colecciones" class="btn-usach-pill btn-teal-outline" id="heroSlideBtn">VER AQUÍ</a>
+                    
+                    <div class="hero-split-nav">
+                        <button class="hero-nav-circle" id="heroPrevBtn" aria-label="Anterior">&#10094;</button>
+                        <button class="hero-nav-circle" id="heroNextBtn" aria-label="Siguiente">&#10095;</button>
+                    </div>
+                </div>
+                
+                <div class="hero-split-image">
+                    <img src="https://picsum.photos/seed/ideahero/1200/650" alt="Colección IDEA" class="hero-rounded-img" id="heroSlideImg">
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- ====================================================================
+         3. ACCESOS DIRECTOS (PÍLDORAS CON ÍCONOS)
+         ==================================================================== -->
+    {% if page.accesos_rapidos %}
+        {{ page.accesos_rapidos }}
+    {% endif %}
+
+    <!-- ====================================================================
+         4. SECCIÓN NOTICIAS (1 GRANDE A LA IZQ + 2 APILADAS A LA DERECHA)
+         ==================================================================== -->
+    {% if page.noticias %}
+        {{ page.noticias }}
+    {% endif %}
+
+    <!-- ====================================================================
+         5. SECCIÓN VIDEOS (TARJETAS CON BORDE NARANJA)
+         ==================================================================== -->
+    {% if page.videos %}
+        {{ page.videos }}
+    {% endif %}
+
+    <!-- ====================================================================
+         6. SECCIÓN GALERÍA (PÍLDORAS CON BORDE CURVO)
+         ==================================================================== -->
+    {% if page.galeria %}
+        {{ page.galeria }}
+    {% endif %}
+
+    <!-- ====================================================================
+         7. SECCIÓN DESTACADOS
+         ==================================================================== -->
+    {% if page.destacados %}
+        {{ page.destacados }}
+    {% else %}
+        <section class="section-destacados-nivel3" id="destacados">
+            <div class="container">
+                <div class="section-header-left">
+                    <h2 class="section-title-teal">Destacados</h2>
+                </div>
+
+                <div class="destacados-n3-grid">
+                  {% if articulos_destacados is not empty %}
+                    {% for item in articulos_destacados %}
+                      <div class="destacado-n3-card" style="background: {{ item.bg_color }}; color: {{ item.text_color }};">
+                          <div class="destacado-n3-badge">{{ item.badge }}</div>
+                          <h4 class="destacado-n3-title">
+                              <a href="{{ item.url }}" style="color: inherit;">{{ item.title }}</a>
+                          </h4>
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    <div class="destacado-n3-card" style="background: #f7941d; color: #fff; padding: 25px; flex-direction: column; justify-content: center;">
+                        <div style="font-size: 26px; font-weight: 800; line-height: 1;">175 AÑOS</div>
+                        <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 5px;">Saludos Aniversario USACH</div>
+                    </div>
+
+                    <div class="destacado-n3-card" style="background: #f5b78b; color: #004d47; padding: 25px; flex-direction: column; justify-content: center;">
+                        <div style="font-size: 15px; font-weight: 800; text-transform: uppercase;">Usa tu credencial en los puntos de acceso habilitados</div>
+                        <div style="font-size: 12px; margin-top: 6px;">Si la extravías informa de inmediato a <strong>credencial@usach.cl</strong></div>
+                    </div>
+
+                    <div class="destacado-n3-card" style="background: #fff0d6; color: #a33800; padding: 25px; flex-direction: column; justify-content: center;">
+                        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #555;">Encuentra aquí los protocolos para</div>
+                        <div style="font-size: 18px; font-weight: 800; text-transform: uppercase; color: #ea7600;">La seguridad de nuestro campus</div>
+                    </div>
+                  {% endif %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- ====================================================================
+         8. SECCIÓN ACTIVIDADES (EVENTOS CALENDARIO)
+         ==================================================================== -->
+    {% if page.actividades %}
+        {{ page.actividades }}
+    {% endif %}
+
+    <!-- ====================================================================
+         9. ALIANZAS O INDEXACIONES (CARRUSEL LOGOS)
+         ==================================================================== -->
+    {% if page.alianzas %}
+        {{ page.alianzas }}
+    {% endif %}
+
+    <!-- ====================================================================
+         10. REDES SOCIALES
+         ==================================================================== -->
+    <section class="section-sociales">
+        <div class="container">
+            <div class="sociales-list">
+                <a href="{{ social_facebook }}" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="{{ social_twitter }}" class="social-link" target="_blank" rel="noopener" aria-label="X Twitter">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                </a>
+                <a href="{{ social_youtube }}" class="social-link" target="_blank" rel="noopener" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"></polygon></svg>
+                </a>
+                <a href="{{ social_instagram }}" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"></line></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+</main>
+
+<!-- ========================================================================
+     11. FOOTER INSTITUCIONAL (Curvas superiores de 35px)
+     ======================================================================== -->
+{% if page.footer %}
+    {{ page.footer }}
+{% else %}
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <img src="{{ base_path ~ directory }}/images/Logo-Comunicaciones.png" alt="Dirección General de Comunicaciones y Medios" class="footer-logo-img">
+            </div>
+
+            <div>
+                <img src="{{ base_path ~ directory }}/images/dei-logo.DsjmdWoQ.png" alt="Dirección Estratégica Informática" class="footer-logo-img">
+            </div>
+
+            <div class="footer-seal-block">
+                <img src="{{ base_path ~ directory }}/images/acreditacion-scaled-1.png" alt="Acreditación CNA 7 años" class="footer-logo-img">
+            </div>
+        </div>
+    </footer>
+{% endif %}

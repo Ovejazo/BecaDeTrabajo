@@ -1,0 +1,24 @@
+name: 'USACH Nivel 3'
+type: theme
+description: 'Tema institucional Nivel 3 para la Universidad de Santiago de Chile (100% nativo).'
+package: Custom
+core_version_requirement: ^10 || ^11
+base theme: false
+
+libraries:
+  - usach_theme/global-styling
+
+regions:
+  header: 'Encabezado institucional'
+  primary_menu: 'Menú principal'
+  hero: 'Hero / Slider principal'
+  accesos_rapidos: 'Accesos rápidos'
+  noticias: 'Sección Noticias'
+  videos: 'Sección Videos'
+  galeria: 'Sección Galería'
+  destacados: 'Sección Destacados'
+  actividades: 'Sección Actividades'
+  alianzas: 'Sección Alianzas'
+  sidebar_first: 'Barra lateral izquierda'
+  content: 'Contenido principal'
+  footer: 'Pie de página'

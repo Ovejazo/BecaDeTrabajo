@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Plantilla del bloque Hero Slider - USACH Nivel 3.
+ */
+#}
+{% set hero = content['#block_content'] %}
+
+<section class="section-hero-split">
+    <div class="container hero-split-grid">
+        <div class="hero-split-content">
+            <h1 id="heroSlideTitle">{{ hero.field_titulo.value|default('Revisa las colecciones')|raw }}</h1>
+            <div id="heroSlideDesc">
+                {{ hero.field_descripcion.value|raw }}
+            </div>
+            
+            {% if hero.field_boton.0.url %}
+                <a href="{{ hero.field_boton.0.url }}" class="btn-usach-pill btn-teal-outline" id="heroSlideBtn">
+                    {{ hero.field_boton.0.title|default('VER AQUÍ') }}
+                </a>
+            {% elseif hero.field_boton.uri %}
+                <a href="{{ hero.field_boton.uri }}" class="btn-usach-pill btn-teal-outline" id="heroSlideBtn">
+                    {{ hero.field_boton.title|default('VER AQUÍ') }}
+                </a>
+            {% else %}
+                <a href="#colecciones" class="btn-usach-pill btn-teal-outline" id="heroSlideBtn">VER AQUÍ</a>
+            {% endif %}
+
+            <div class="hero-split-nav">
+                <button class="hero-nav-circle" id="heroPrevBtn" aria-label="Anterior">&#10094;</button>
+                <button class="hero-nav-circle" id="heroNextBtn" aria-label="Siguiente">&#10095;</button>
+            </div>
+        </div>
+
+        <div class="hero-split-image">
+            {% if hero.field_imagen.entity %}
+                <img src="{{ file_url(hero.field_imagen.entity.getFileUri()|default(hero.field_imagen.entity.uri.value)) }}" alt="{{ hero.field_titulo.value }}" class="hero-rounded-img" id="heroSlideImg">
+            {% else %}
+                <img src="https://picsum.photos/seed/ideahero/1200/650" alt="Colección IDEA" class="hero-rounded-img" id="heroSlideImg">
+            {% endif %}
+        </div>
+    </div>
+</section>

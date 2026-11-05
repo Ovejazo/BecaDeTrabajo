@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Plantilla del bloque Sección Noticias - USACH Nivel 3.
+ */
+#}
+<section class="section-noticias-nivel3" id="noticias">
+    <div class="container">
+        <div class="section-header-left">
+            <h2 class="section-title-teal">{{ seccion_titulo|default('Noticias') }}</h2>
+        </div>
+
+        <div class="noticias-asymm-grid">
+          {% if noticias_destacadas is not empty %}
+            {# Noticia Grande (Izquierda) - La más reciente #}
+            {% set primera = noticias_destacadas[0] %}
+            <article class="noticia-large-card">
+                <a href="{{ primera.url }}">
+                    <img src="{{ primera.image }}" alt="{{ primera.title }}" class="noticia-large-img">
+                </a>
+                <div class="noticia-large-body">
+                    <span class="noticia-date-teal">{{ primera.date }}</span>
+                    <h3 class="noticia-large-title">
+                        <a href="{{ primera.url }}">{{ primera.title }}</a>
+                    </h3>
+                    <div>
+                        <a href="{{ primera.url }}" class="btn-usach-pill btn-teal-outline">VER MÁS</a>
+                    </div>
+                </div>
+            </article>
+
+            {# Noticias Pequeñas Apiladas (Derecha) - 2da y 3ra #}
+            <div class="noticias-small-stack">
+              {% for noticia in noticias_destacadas|slice(1, 2) %}
+                <article class="noticia-horizontal-card">
+                    <a href="{{ noticia.url }}">
+                        <img src="{{ noticia.image }}" alt="{{ noticia.title }}" class="noticia-h-img">
+                    </a>
+                    <div class="noticia-h-body">
+                        <div>
+                            <span class="noticia-date-teal">{{ noticia.date }}</span>
+                            <h4 class="noticia-h-title">
+                                <a href="{{ noticia.url }}">{{ noticia.title }}</a>
+                            </h4>
+                        </div>
+                        <div>
+                            <a href="{{ noticia.url }}" class="btn-usach-pill btn-teal-outline">VER MÁS</a>
+                        </div>
+                    </div>
+                </article>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div style="text-align: center;">
+            <a href="{{ base_path }}noticias" class="btn-usach-pill btn-teal-solid">
+                VER MÁS NOTICIAS
+            </a>
+        </div>
+    </div>
+</section>

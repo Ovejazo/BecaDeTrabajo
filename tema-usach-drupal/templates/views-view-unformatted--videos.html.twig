@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Filas de la vista Videos - USACH Nivel 3.
+ */
+#}
+<div class="videos-nivel3-grid">
+  {% if videos_list is not empty %}
+    {% for video in videos_list %}
+      <div class="video-n3-card">
+          <div class="video-n3-thumb-wrapper">
+              <a href="{{ video.url }}">
+                  <img src="{{ video.image }}" alt="{{ video.title }}" class="video-n3-thumb">
+                  <div class="video-play-red-btn">
+                      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </div>
+              </a>
+          </div>
+          <h4 class="video-n3-title">
+              <a href="{{ video.url }}">{{ video.title }}</a>
+          </h4>
+          <a href="{{ video.url }}" class="btn-usach-pill btn-orange-outline">VER VIDEO</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    {% for row in rows %}
+      <div class="video-n3-card" style="padding: 20px;">
+          {{ row.content }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>

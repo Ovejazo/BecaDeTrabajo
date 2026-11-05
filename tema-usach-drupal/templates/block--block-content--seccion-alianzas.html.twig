@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Plantilla del bloque Sección Alianzas - USACH Nivel 3.
+ */
+#}
+<section class="section-alianzas" id="alianzas">
+    <div class="container">
+        <h2 class="section-title-teal">{{ seccion_titulo|default('Alianzas o Indexaciones') }}</h2>
+
+        <div class="alianzas-slider-wrapper">
+            <button class="alianza-nav-arrow" id="alianzasPrevBtn" aria-label="Anterior">&#10094;</button>
+            
+            <div class="alianzas-logos">
+              {% if alianzas_logos is not empty %}
+                {% for logo in alianzas_logos %}
+                  <img src="{{ logo.url }}" alt="{{ logo.alt }}">
+                {% endfor %}
+              {% else %}
+                <img src="{{ base_path ~ directory }}/images/Usach-P1.png" alt="USACH">
+                <img src="{{ base_path ~ directory }}/images/netflix.png" alt="Alianza">
+                <img src="{{ base_path ~ directory }}/images/imagen-de-marca.png" alt="Marca">
+                <img src="{{ base_path ~ directory }}/images/dei-logo.DsjmdWoQ.png" alt="DEI">
+              {% endif %}
+            </div>
+
+            <button class="alianza-nav-arrow" id="alianzasNextBtn" aria-label="Siguiente">&#10095;</button>
+        </div>
+    </div>
+</section>

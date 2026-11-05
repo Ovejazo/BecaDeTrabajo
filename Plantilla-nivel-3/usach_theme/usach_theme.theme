@@ -1,0 +1,458 @@
+<?php
+
+/**
+ * @file
+ * Funciones de preprocesamiento para el tema USACH Nivel 3.
+ * Integra contenido dinámico por etiquetas, calendario automático y ajustes de interfaz.
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Función auxiliar para consultar nodos publicados por etiqueta de taxonomía.
+ */
+function _usach_theme_get_nodes_by_tag(array $tag_names, $limit = 3) {
+  try {
+    $entity_type_manager = \Drupal::entityTypeManager();
+    $term_storage = $entity_type_manager->getStorage('taxonomy_term');
+
+    $term_query = $term_storage->getQuery()
+      ->condition('name', $tag_names, 'IN')
+      ->accessCheck(FALSE);
+    $term_ids = $term_query->execute();
+
+    if (empty($term_ids)) {
+      return [];
+    }
+
+    $node_storage = $entity_type_manager->getStorage('node');
+    $query = $node_storage->getQuery()
+      ->condition('status', 1)
+      ->condition('type', 'article')
+      ->condition('field_tags', array_values($term_ids), 'IN')
+      ->sort('created', 'DESC')
+      ->range(0, $limit)
+      ->accessCheck(FALSE);
+
+    $nids = $query->execute();
+    if (empty($nids)) {
+      return [];
+    }
+
+    $nodes = $node_storage->loadMultiple($nids);
+    $date_formatter = \Drupal::service('date.formatter');
+    $file_url_generator = \Drupal::service('file_url_generator');
+    $items = [];
+
+    foreach ($nodes as $node) {
+      $img_url = '';
+      if ($node->hasField('field_image') && !$node->get('field_image')->isEmpty()) {
+        $file = $node->get('field_image')->entity;
+        if ($file) {
+          $img_url = $file_url_generator->generateAbsoluteString($file->getFileUri());
+        }
+      }
+
+      $summary = '';
+      if ($node->hasField('body') && !$node->get('body')->isEmpty()) {
+        $body_val = $node->get('body')->summary ?: strip_tags($node->get('body')->value);
+        $summary = mb_strimwidth($body_val, 0, 110, '...');
+      }
+
+      $items[] = [
+        'id' => $node->id(),
+        'title' => $node->getTitle(),
+        'url' => $node->toUrl()->toString(),
+        'date' => $date_formatter->format($node->getCreatedTime(), 'custom', 'd \d\e F'),
+        'image' => $img_url,
+        'summary' => $summary,
+      ];
+    }
+
+    return $items;
+  } catch (\Exception $e) {
+    return [];
+  }
+}
+
+/**
+ * Obtiene automáticamente las 2 actividades más cercanas en el tiempo a partir de un JSON o API.
+ */
+function _usach_theme_get_proximas_actividades() {
+  $meses = [
+    1 => 'de enero',
+    2 => 'de febrero',
+    3 => 'de marzo',
+    4 => 'de abril',
+    5 => 'de mayo',
+    6 => 'de junio',
+    7 => 'de julio',
+    8 => 'de agosto',
+    9 => 'de septiembre',
+    10 => 'de octubre',
+    11 => 'de noviembre',
+    12 => 'de diciembre',
+  ];
+
+  $json_path = DRUPAL_ROOT . '/themes/custom/usach_theme/data/actividades.json';
+  if (!file_exists($json_path)) {
+    return [];
+  }
+
+  $json_content = file_get_contents($json_path);
+  $data = json_decode($json_content, TRUE);
+  if (!is_array($data) || empty($data)) {
+    return [];
+  }
+
+  $hoy = strtotime('today 00:00:00');
+  $futuras = [];
+  $pasadas = [];
+
+  foreach ($data as $item) {
+    if (empty($item['fecha']) || empty($item['titulo'])) {
+      continue;
+    }
+    $time = strtotime($item['fecha']);
+    if (!$time) {
+      continue;
+    }
+
+    $mes_num = (int) date('n', $time);
+    $mes_nombre = isset($meses[$mes_num]) ? $meses[$mes_num] : date('F', $time);
+
+    $obj = [
+      'timestamp' => $time,
+      'dia' => date('d', $time),
+      'day' => date('d', $time),
+      'mes' => $mes_nombre,
+      'month' => $mes_nombre,
+      'titulo' => $item['titulo'],
+      'title' => $item['titulo'],
+      'enlace' => !empty($item['enlace']) ? $item['enlace'] : '#',
+      'url' => !empty($item['enlace']) ? $item['enlace'] : '#',
+    ];
+
+    if ($time >= $hoy) {
+      $futuras[] = $obj;
+    } else {
+      $pasadas[] = $obj;
+    }
+  }
+
+  usort($futuras, function ($a, $b) {
+    return $a['timestamp'] <=> $b['timestamp'];
+  });
+
+  usort($pasadas, function ($a, $b) {
+    return $b['timestamp'] <=> $a['timestamp'];
+  });
+
+  $resultado = $futuras;
+  if (count($resultado) < 2) {
+    foreach ($pasadas as $p) {
+      $resultado[] = $p;
+      if (count($resultado) >= 2) {
+        break;
+      }
+    }
+  }
+
+  return array_slice($resultado, 0, 2);
+}
+
+/**
+ * Obtiene las 3 noticias destacadas más recientes de Drupal.
+ */
+function _usach_theme_get_noticias_destacadas() {
+  $noticias = _usach_theme_get_nodes_by_tag(['Noticias', 'Noticia', 'noticias', 'noticia'], 3);
+
+  if (empty($noticias)) {
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $nids = $node_storage->getQuery()
+      ->condition('status', 1)
+      ->condition('type', 'article')
+      ->sort('created', 'DESC')
+      ->range(0, 3)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if (!empty($nids)) {
+      $nodes = $node_storage->loadMultiple($nids);
+      $date_formatter = \Drupal::service('date.formatter');
+      $file_url_generator = \Drupal::service('file_url_generator');
+
+      foreach ($nodes as $node) {
+        $img_url = '';
+        if ($node->hasField('field_image') && !$node->get('field_image')->isEmpty()) {
+          $file = $node->get('field_image')->entity;
+          if ($file) {
+            $img_url = $file_url_generator->generateAbsoluteString($file->getFileUri());
+          }
+        }
+
+        $noticias[] = [
+          'id' => $node->id(),
+          'title' => $node->getTitle(),
+          'url' => $node->toUrl()->toString(),
+          'date' => $date_formatter->format($node->getCreatedTime(), 'custom', 'd \d\e F'),
+          'image' => $img_url,
+          'summary' => '',
+        ];
+      }
+    }
+  }
+
+  foreach ($noticias as &$item) {
+    if (empty($item['image'])) {
+      $item['image'] = 'https://picsum.photos/seed/noticia' . $item['id'] . '/700/400';
+    }
+  }
+
+  return $noticias;
+}
+
+/**
+ * Obtiene automáticamente los 2 videos más recientes.
+ */
+function _usach_theme_get_videos_destacados() {
+  $videos = _usach_theme_get_nodes_by_tag(['Videos', 'Video', 'videos', 'video'], 2);
+  foreach ($videos as &$v) {
+    if (empty($v['image'])) {
+      $v['image'] = 'https://picsum.photos/seed/video' . $v['id'] . '/600/400';
+    }
+  }
+  return $videos;
+}
+
+/**
+ * Obtiene automáticamente las 3 imágenes más recientes de la galería.
+ */
+function _usach_theme_get_galeria_destacada() {
+  $galeria = _usach_theme_get_nodes_by_tag(['Galería', 'Galeria', 'galería', 'galeria'], 3);
+  foreach ($galeria as &$g) {
+    if (empty($g['image'])) {
+      $g['image'] = 'https://picsum.photos/seed/galeria' . $g['id'] . '/500/350';
+    }
+  }
+  return $galeria;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function usach_theme_preprocess_page(&$variables) {
+  try {
+    // 1. NOTICIAS (Hasta 3: 1 destacada + 2 secundarias)
+    $variables['noticias_destacadas'] = _usach_theme_get_noticias_destacadas();
+
+    // 2. VIDEOS (Hasta 2)
+    $variables['videos_destacados'] = _usach_theme_get_videos_destacados();
+
+    // 3. GALERÍA (Hasta 3)
+    $variables['galeria_destacada'] = _usach_theme_get_galeria_destacada();
+
+    // 4. DESTACADOS (Hasta 3)
+    $destacados = _usach_theme_get_nodes_by_tag(['Destacados', 'Destacado', 'destacados', 'destacado'], 3);
+    $variables['destacados_items'] = $destacados;
+
+    // 5. ACTIVIDADES / CALENDARIO (Desde JSON o API)
+    $variables['actividades_proximas'] = _usach_theme_get_proximas_actividades();
+
+    // 6. REDES SOCIALES (Configurables desde el navegador en Apariencia -> Configuración)
+    $variables['social_facebook'] = theme_get_setting('social_facebook') ?: 'https://facebook.com/usach';
+    $variables['social_twitter'] = theme_get_setting('social_twitter') ?: 'https://twitter.com/usach';
+    $variables['social_youtube'] = theme_get_setting('social_youtube') ?: 'https://youtube.com/usach';
+    $variables['social_instagram'] = theme_get_setting('social_instagram') ?: 'https://instagram.com/usach';
+
+    // 7. Título y alias de páginas interiores
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface) {
+      $variables['page_title'] = $node->getTitle();
+    }
+    $current_path = \Drupal::service('path.current')->getPath();
+    $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+    $variables['current_page_alias'] = ltrim($alias, '/');
+
+  } catch (\Exception $e) {
+    $variables['noticias_destacadas'] = [];
+    $variables['videos_destacados'] = [];
+    $variables['galeria_destacada'] = [];
+    $variables['destacados_items'] = [];
+    $variables['actividades_proximas'] = [];
+    $variables['social_facebook'] = 'https://facebook.com/usach';
+    $variables['social_twitter'] = 'https://twitter.com/usach';
+    $variables['social_youtube'] = 'https://youtube.com/usach';
+    $variables['social_instagram'] = 'https://instagram.com/usach';
+  }
+}
+
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ */
+function usach_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $bundle = $variables['elements']['content']['#block_content']->bundle();
+    $suggestions[] = 'block__' . $bundle;
+    $suggestions[] = 'block__block_content__' . $bundle;
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function usach_theme_preprocess_block(&$variables) {
+  $block = $variables['content']['#block_content'] ?? ($variables['elements']['content']['#block_content'] ?? null);
+  if ($block && $block->bundle() === 'accesos_rapidos') {
+    $file_url_generator = \Drupal::service('file_url_generator');
+    for ($i = 1; $i <= 3; $i++) {
+      $icon_field = 'field_icono_' . $i;
+      $url = '';
+
+      // 1. Imagen subida directamente en el bloque
+      if ($block->hasField($icon_field) && !$block->get($icon_field)->isEmpty()) {
+        $file = $block->get($icon_field)->entity;
+        if ($file) {
+          $url = $file_url_generator->generateString($file->getFileUri());
+        }
+      }
+
+      // 2. Imagen predeterminada configurada en el campo (carpeta default_images)
+      if (empty($url) && $block->hasField($icon_field)) {
+        try {
+          $field_def = $block->get($icon_field)->getFieldDefinition();
+          $default_image = $field_def->getSetting('default_image');
+          if (!empty($default_image['uuid'])) {
+            $files = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uuid' => $default_image['uuid']]);
+            $default_file = reset($files);
+            if ($default_file) {
+              $url = $file_url_generator->generateString($default_file->getFileUri());
+            }
+          }
+        } catch (\Exception $e) {
+          // Fallback silencioso
+        }
+      }
+
+      $variables['pildora_' . $i . '_icon_url'] = $url;
+
+      // Enlace y título
+      $link_field = 'field_enlace_' . $i;
+      $link_url = '';
+      $link_title = '';
+      if ($block->hasField($link_field) && !$block->get($link_field)->isEmpty()) {
+        $link_item = $block->get($link_field)->first();
+        if ($link_item) {
+          $link_title = $link_item->title ?? '';
+          try {
+            $link_url = $link_item->getUrl()->toString();
+          } catch (\Exception $e) {
+            $link_url = $link_item->uri ?? '';
+          }
+        }
+      }
+      $variables['pildora_' . $i . '_title'] = $link_title;
+      $variables['pildora_' . $i . '_url'] = $link_url;
+    }
+  }
+
+  // Lógica para el bloque de Sección Noticias
+  if ($block && $block->bundle() === 'seccion_noticias') {
+    $variables['noticias_destacadas'] = _usach_theme_get_noticias_destacadas();
+    $variables['seccion_titulo'] = ($block->hasField('field_titulo') && !$block->get('field_titulo')->isEmpty())
+      ? $block->get('field_titulo')->value
+      : 'Noticias';
+  }
+
+  // Lógica para el bloque de Sección Videos
+  if ($block && $block->bundle() === 'seccion_videos') {
+    $variables['videos_destacados'] = _usach_theme_get_videos_destacados();
+    $variables['seccion_titulo'] = ($block->hasField('field_titulo') && !$block->get('field_titulo')->isEmpty())
+      ? $block->get('field_titulo')->value
+      : 'Videos';
+  }
+
+  // Lógica para el bloque de Sección Galería
+  if ($block && $block->bundle() === 'seccion_galeria') {
+    $variables['galeria_destacada'] = _usach_theme_get_galeria_destacada();
+    $titulo = 'Galería';
+    if ($block->hasField('field_titulo') && !$block->get('field_titulo')->isEmpty()) {
+      $titulo = $block->get('field_titulo')->value;
+    } elseif ($block->hasField('field_titulo_de_galeria') && !$block->get('field_titulo_de_galeria')->isEmpty()) {
+      $titulo = $block->get('field_titulo_de_galeria')->value;
+    }
+    $variables['seccion_titulo'] = $titulo;
+  }
+
+  // Lógica para el bloque de Sección Actividades (Fechas)
+  if ($block && $block->bundle() === 'seccion_actividades') {
+    $variables['actividades_proximas'] = _usach_theme_get_proximas_actividades();
+    $titulo = 'Actividades';
+    if ($block->hasField('field_titulo') && !$block->get('field_titulo')->isEmpty()) {
+      $titulo = $block->get('field_titulo')->value;
+    } elseif ($block->hasField('field_titulo_de_actividades') && !$block->get('field_titulo_de_actividades')->isEmpty()) {
+      $titulo = $block->get('field_titulo_de_actividades')->value;
+    }
+    $variables['seccion_titulo'] = $titulo;
+  }
+
+  // Lógica para el bloque de Sección Alianzas
+  if ($block && $block->bundle() === 'seccion_alianzas') {
+    $file_url_generator = \Drupal::service('file_url_generator');
+    $logos = [];
+
+    if ($block->hasField('field_logos') && !$block->get('field_logos')->isEmpty()) {
+      foreach ($block->get('field_logos') as $item) {
+        if ($item->entity) {
+          $logos[] = [
+            'url' => $file_url_generator->generateString($item->entity->getFileUri()),
+            'alt' => $item->alt ?: 'Alianza',
+          ];
+        }
+      }
+    }
+
+    $variables['alianzas_logos'] = $logos;
+    $variables['seccion_titulo'] = ($block->hasField('field_titulo') && !$block->get('field_titulo')->isEmpty())
+      ? $block->get('field_titulo')->value
+      : 'Alianzas o Indexaciones';
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view_unformatted().
+ */
+function usach_theme_preprocess_views_view_unformatted(&$variables) {
+  $view = $variables['view'] ?? null;
+  if ($view && $view->id() === 'videos') {
+    $file_url_generator = \Drupal::service('file_url_generator');
+    $videos = [];
+    if (!empty($view->result)) {
+      foreach ($view->result as $row) {
+        $node = $row->_entity ?? null;
+        if ($node) {
+          $img_url = '';
+          if ($node->hasField('field_image') && !$node->get('field_image')->isEmpty()) {
+            $file = $node->get('field_image')->entity;
+            if ($file) {
+              $img_url = $file_url_generator->generateAbsoluteString($file->getFileUri());
+            }
+          }
+          if (empty($img_url)) {
+            $img_url = 'https://picsum.photos/seed/video' . $node->id() . '/600/400';
+          }
+
+          $videos[] = [
+            'id' => $node->id(),
+            'title' => $node->getTitle(),
+            'url' => $node->toUrl()->toString(),
+            'image' => $img_url,
+          ];
+        }
+      }
+    }
+    $variables['videos_list'] = $videos;
+  }
+}

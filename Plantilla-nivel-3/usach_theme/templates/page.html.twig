@@ -1,0 +1,79 @@
+{#
+/**
+ * @file
+ * Plantilla de página general - USACH Nivel 3.
+ */
+#}
+
+<header class="site-header">
+    <div class="header-inner">
+        <div class="site-branding">
+            <a href="{{ front_page }}">
+                <img src="{{ base_path ~ directory }}/images/Usach-P1.png" alt="USACH" class="header-logo-img">
+                <div class="site-title-group">
+                    <span class="site-sublabel">INSTITUTO DE</span>
+                    <span class="site-main-title">ESTUDIOS AVANZADOS</span>
+                </div>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="mobileMenuBtnN3" aria-label="Abrir Menú">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-navigation" id="siteNavN3">
+            <ul class="nav-menu-list">
+                <li><a href="{{ front_page }}" class="{{ current_page_alias == '' ? 'is-active' : '' }}">Inicio</a></li>
+                <li><a href="{{ base_path }}nosotros" class="{{ current_page_alias == 'nosotros' ? 'is-active' : '' }}">Nosotros</a></li>
+                <li><a href="{{ base_path }}programas" class="{{ current_page_alias == 'programas' ? 'is-active' : '' }}">Programas</a></li>
+                <li><a href="{{ base_path }}investigacion" class="{{ current_page_alias == 'investigacion' ? 'is-active' : '' }}">Investigación</a></li>
+                <li><a href="{{ base_path }}vinculacion" class="{{ current_page_alias == 'vinculacion' ? 'is-active' : '' }}">Vinculación con el medio</a></li>
+                <li><a href="{{ base_path }}publicaciones" class="{{ current_page_alias == 'publicaciones' ? 'is-active' : '' }}">Publicaciones</a></li>
+                <li><a href="{{ base_path }}biblioteca" class="{{ current_page_alias == 'biblioteca' ? 'is-active' : '' }}">Biblioteca</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main id="main-content" style="padding: 40px 0 60px; min-height: 60vh;">
+    <div class="container">
+        {% if page.sidebar_first %}
+            <div class="layout-with-sidebar">
+                <aside class="sidebar-first" aria-label="Menú de sección">
+                    {{ page.sidebar_first }}
+                </aside>
+                <section class="main-content-column">
+                    {% if page_title %}
+                        <h1 class="page-title">{{ page_title }}</h1>
+                    {% endif %}
+                    {{ page.content }}
+                </section>
+            </div>
+        {% else %}
+            {% if page_title %}
+                <h1 class="page-title">{{ page_title }}</h1>
+            {% endif %}
+            {{ page.content }}
+        {% endif %}
+    </div>
+</main>
+
+{% if page.footer %}
+    {{ page.footer }}
+{% else %}
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <img src="{{ base_path ~ directory }}/images/Logo-Comunicaciones.png" alt="Dirección General de Comunicaciones y Medios" class="footer-logo-img">
+            </div>
+
+            <div>
+                <img src="{{ base_path ~ directory }}/images/dei-logo.DsjmdWoQ.png" alt="Dirección Estratégica Informática" class="footer-logo-img">
+            </div>
+
+            <div class="footer-seal-block">
+                <img src="{{ base_path ~ directory }}/images/acreditacion-scaled-1.png" alt="Acreditación CNA 7 años" class="footer-logo-img">
+            </div>
+        </div>
+    </footer>
+{% endif %}

@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Plantilla del bloque Sección Galería - USACH Nivel 3.
+ */
+#}
+<section class="section-galeria-nivel3" id="galeria">
+    <div class="container">
+        <div class="section-header-left">
+            <h2 class="section-title-teal">{{ seccion_titulo|default('Galería') }}</h2>
+        </div>
+
+        <div class="galeria-n3-grid">
+          {% if galeria_destacada is not empty %}
+            {% for foto in galeria_destacada %}
+              <div class="galeria-n3-card">
+                  <a href="{{ foto.url }}">
+                      <img src="{{ foto.image }}" alt="{{ foto.title }}" class="galeria-n3-thumb">
+                  </a>
+                  <p class="galeria-n3-caption">
+                      <a href="{{ foto.url }}">{{ foto.title }}</a>
+                  </p>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <div style="text-align: center;">
+            <a href="#toda-la-galeria" class="btn-usach-pill btn-teal-solid">
+                VER MÁS FOTOS
+            </a>
+        </div>
+    </div>
+</section>
