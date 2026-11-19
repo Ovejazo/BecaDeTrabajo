@@ -1,0 +1,14 @@
+name: 'Tema Institucional'
+type: theme
+description: 'Tema personalizado Nivel 2.'
+core_version_requirement: ^10 || ^11
+base theme: starterkit_theme
+
+regions:
+  header: 'Cabecera (Menú y Logo)'
+  hero: 'Banner Principal'
+  content: 'Contenido Principal'
+  footer: 'Pie de Página'
+
+libraries:
+  - tema_institucional/global-styling
