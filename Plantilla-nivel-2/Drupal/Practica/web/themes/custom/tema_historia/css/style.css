@@ -1458,6 +1458,12 @@ body {
   font-weight: 700;
 }
 
+/* Ocultar la etiqueta del campo ("Cuerpo", etc.) */
+.col-contenido .field__label,
+.pagina-interna .field__label {
+  display: none !important;
+}
+
 .col-sidebar h2,
 .col-sidebar .block-title {
   color: #2b3b42;
@@ -1521,6 +1527,409 @@ body {
 .col-sidebar .menu li.menu-item--active-trail > a {
   color: #e66400 !important; /* Naranja activo */
   font-weight: 700;
+}
+
+/* ======================================================
+   ACORDEONES / DESPLEGABLES DE CONTENIDO (NORMATIVAS, LEYES, ETC.)
+   ====================================================== */
+
+.acordeon-normativa,
+.col-contenido details {
+  border-bottom: 1px solid #e2e8f0; /* Línea divisoria gris claro */
+  padding: 18px 0;
+  transition: all 0.2s ease;
+}
+
+/* El título naranja que se puede cliquear */
+.acordeon-normativa summary,
+.col-contenido details summary {
+  color: #e66400; /* Naranja institucional de la foto */
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none; /* Oculta la flecha por defecto */
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+/* Ocultar el triángulo por defecto en Chrome, Edge y Safari */
+.acordeon-normativa summary::-webkit-details-marker,
+.col-contenido details summary::-webkit-details-marker {
+  display: none;
+}
+
+.acordeon-normativa summary:hover,
+.col-contenido details summary:hover {
+  color: #c95500;
+}
+
+/* El texto que se despliega hacia abajo */
+.acordeon-normativa .acordeon-contenido,
+.acordeon-normativa > p,
+.col-contenido details .acordeon-contenido,
+.col-contenido details > p {
+  margin-top: 14px;
+  margin-bottom: 8px;
+  color: #4b5563;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+/* Enlaces dentro del texto desplegado (en turquesa institucional) */
+.acordeon-normativa a,
+.col-contenido details a {
+  color: #00a499;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.acordeon-normativa a:hover,
+.col-contenido details a:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+/* ======================================================
+   SECCIÓN TALLERES - CONVERSATORIOS (TARJETAS CON BORDE TURQUESA ASIMÉTRICO)
+   ====================================================== */
+
+.talleres-conversatorios,
+.view-talleres-conversatorios,
+.block-views-blocktalleres-conversatorios-block-1 {
+  margin-top: 55px;
+  margin-bottom: 45px;
+  width: 100%;
+}
+
+/* 1. Título de la sección */
+.talleres-conversatorios h2,
+.talleres-conversatorios .block-title,
+.talleres-conversatorios-titulo {
+  color: #2b3b42;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 35px;
+  text-align: left;
+}
+
+/* 2. Cuadrícula de 3 columnas */
+.talleres-conversatorios .view-content,
+.talleres-conversatorios .views-view-unformatted,
+.talleres-conversatorios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+/* 3. Tarjeta individual con el borde institucional asimétrico abierto abajo */
+.talleres-conversatorios .views-row,
+.talleres-card {
+  border: 1.6px solid #00a499;
+  border-bottom: none;
+  border-top-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.talleres-conversatorios .views-row:hover,
+.talleres-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 164, 153, 0.12);
+}
+
+/* 4. Imagen afiche del taller */
+.talleres-conversatorios .views-row img,
+.talleres-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  display: block;
+  margin-bottom: 14px;
+}
+
+/* 5. Título del evento en turquesa centrado */
+.talleres-conversatorios .views-field-title,
+.talleres-conversatorios .views-field-title a,
+.talleres-card-titulo,
+.talleres-card-titulo a {
+  color: #00a499;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1.35;
+  margin: 0 0 10px 0;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.talleres-conversatorios .views-field-title a:hover,
+.talleres-card-titulo a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* 6. Fecha y hora centrada */
+.talleres-conversatorios .views-field:not(.views-field-title):not([class*="afiche"]):not([class*="image"]):not([class*="imagen"]),
+.talleres-conversatorios [class*="fecha"],
+.talleres-conversatorios time,
+.talleres-card-fecha {
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center !important;
+  display: block;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: 8px;
+}
+
+/*CONFIGURACION DE VIDEOS DE YT*/
+/* ======================================================
+   VÍDEO DE YOUTUBE Y DESCRIPCIÓN (PÁGINAS INTERNAS)
+   ====================================================== */
+
+/* 1. Hace que el iframe de YouTube ocupe el 100% del ancho con proporción 16:9 y esquinas redondeadas */
+.col-contenido iframe {
+  width: 100% !important;
+  aspect-ratio: 16 / 9;
+  height: auto !important;
+  border: none;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* 2. El párrafo de descripción justo debajo del video con la línea morada institucional al final */
+.col-contenido iframe + p,
+.col-contenido .video-descripcion {
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  padding-bottom: 25px;
+  border-bottom: 2.5px solid #84329b; /* Morado característico de Género / Diversidad */
+  margin-bottom: 30px;
+}
+
+/* ======================================================
+   SECCIÓN CAMPAÑAS (GALERÍA DE IMÁGENES / PÁGINAS INTERNAS)
+   ====================================================== */
+
+.view-campanas,
+.block-views-blockcampanas-block-1 {
+  margin-top: 35px;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+/* 1. Título "Campañas" */
+.block-views-blockcampanas-block-1 h2,
+.view-campanas .view-header h2,
+.view-campanas h2 {
+  color: #2b3b42 !important;
+  font-size: 2.1rem !important;
+  font-weight: 700 !important;
+  margin-top: 0 !important;
+  margin-bottom: 30px !important;
+  text-align: left !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* 2. Cuadrícula de 3 columnas horizontales */
+.view-campanas .view-content,
+.view-campanas .views-view-unformatted {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 35px !important;
+  width: 100% !important;
+}
+
+/* 3. Tarjeta individual con la línea naranja inferior */
+.view-campanas .views-row {
+  display: flex !important;
+  flex-direction: column !important;
+  padding-bottom: 18px !important;
+  border-bottom: 3.5px solid #e66400 !important; /* La línea naranja característica de la foto */
+  gap: 14px !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  transition: transform 0.2s ease !important;
+}
+
+.view-campanas .views-row:hover {
+  transform: translateY(-3px) !important;
+}
+
+/* 4. Imagen afiche / póster */
+.view-campanas .views-row img {
+  width: 100% !important;
+  height: 175px !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+  display: block !important;
+}
+
+/* 5. Título de la campaña en turquesa institucional */
+.view-campanas .views-field-title a,
+.view-campanas .views-field-title span {
+  color: #00a499 !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  line-height: 1.35 !important;
+  display: block !important;
+  transition: opacity 0.2s !important;
+}
+
+.view-campanas .views-field-title a:hover {
+  opacity: 0.8 !important;
+  text-decoration: underline !important;
+}
+
+/* ======================================================
+   SECCIÓN DOCUMENTOS / RECURSOS (TARJETAS EN 2 COLUMNAS)
+   ====================================================== */
+
+.view-documentos,
+.block-views-blockdocumentos-block-1 {
+  margin-top: 25px;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+/* 1. Título "Documentos" */
+.block-views-blockdocumentos-block-1 h2,
+.view-documentos .view-header h2,
+.view-documentos h2 {
+  color: #2b3b42 !important;
+  font-size: 2.1rem !important;
+  font-weight: 700 !important;
+  margin-top: 0 !important;
+  margin-bottom: 28px !important;
+  text-align: left !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* 2. Cuadrícula de 2 columnas */
+.view-documentos .view-content,
+.view-documentos .views-view-unformatted {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 25px !important;
+  width: 100% !important;
+  align-items: stretch !important;
+}
+
+/* 3. Cada tarjeta con borde gris y esquinas levemente redondeadas */
+.view-documentos .views-row {
+  background-color: #ffffff !important;
+  border: 1px solid #9ca3af !important;
+  border-radius: 6px !important;
+  padding: 22px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.view-documentos .views-row:hover {
+  border-color: #00a499 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 4. Título del documento en turquesa */
+.view-documentos .views-field-title,
+.view-documentos .views-field-title a,
+.view-documentos .views-field-title span {
+  color: #00a499 !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+}
+
+.view-documentos .views-field-title a:hover {
+  text-decoration: underline !important;
+}
+
+/* 5. Descripción gris dentro de la tarjeta */
+.view-documentos .views-field-body,
+.view-documentos .views-field-body p {
+  color: #4b5563 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.55 !important;
+  margin: 0 0 12px 0 !important;
+}
+
+/* 6. Enlace del archivo PDF en naranja */
+.view-documentos .file {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-documentos .file a,
+.view-documentos .views-field:last-child a {
+  color: #e66400 !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+.view-documentos .file a:hover,
+.view-documentos .views-field:last-child a:hover {
+  text-decoration: underline !important;
+}
+
+/* ======================================================
+   AJUSTE OPCIONAL PARA SUBMENÚS ANIDADOS EN EL SIDEBAR
+   ====================================================== */
+.col-sidebar .menu li::before {
+  top: 24px;
+  transform: translateY(-50%);
+}
+
+.col-sidebar .menu ul.menu {
+  margin-top: 10px;
+  padding-left: 16px;
+}
+
+.col-sidebar .menu ul.menu li {
+  padding: 8px 0 8px 20px;
+  border-bottom: 1px solid #f3b07a;
+}
+
+.col-sidebar .menu ul.menu li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.col-sidebar .menu ul.menu li::before {
+  top: 18px;
+  font-size: 1.1rem;
 }
 
 
